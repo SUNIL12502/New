@@ -1,8 +1,6 @@
 # final-project-jams
 final-project-jams created by GitHub Classroom
 
-Team - JAMS
-
 ## Team members: 	
 1. Moinuddin Raziuddin Khaja (NUID - 0027620250, Email - khaja.m@northeastern.edu)		 	
 2. Anay Rajesh Pampatwar (NUID - 002766273, Email - pampatwar.a@northeastern.edu)
@@ -12,7 +10,7 @@ Team - JAMS
 ## Overview:
 A Stocks Portfolio management web application which enables the user to view stock listings, IPO listings, add stocks to watchlist, buy/sell stocks, display the portfolio and showcase the stock news.
 
-Requirements:
+## User Requirements:
 
 * Landing Page: 
 	Landing Page will show the features that we offer. 
@@ -33,22 +31,22 @@ Once the users successfully Logs in/Registers he will be taken to the Dashboard 
 
 *  User Dashboard:
   User Dashboard will allow user to view the stock listings and can navigate to various sections such as :
-	*	User Watchlists
+	* User Watchlists : 
 		As a User, I should be able to add stocks to Watchlist.
 
-	* User Portfolio
+	* User Portfolio : 
       As a User, I should be able to view my stock holdings.
 
-	* Page to buy/sell stocks
+	* Page to buy/sell stocks : 
 		As a User, I should be able to buy/sell stocks.
 
-	* Latest news 
+	* Latest news : 
 		As a User, I can view the latest news.
 
-	* Order History
+	* Order History : 
 		As a User, I should be able to view my past transaction history.
 
-	* IPO Listings
+	* IPO Listings : 
     	As a User, I can see the IPO anticipated in next three months.
 
 # Domain Model
