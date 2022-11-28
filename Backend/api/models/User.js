@@ -18,8 +18,8 @@ const userSchema = new mongoose.Schema({
         required: 'Password field is required',
     },
     balance:{
-        type: String,
-        default:"50000",
+        type: Number,
+        default: "50000",
     }
 },{versionKey: false });
 
