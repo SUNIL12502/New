@@ -45,7 +45,7 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
 const HamburgerMenu = ()  => {
     const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(true);
   const [selected, setSelected] = useState("Dashboard");//Represents the tab which is currently selected(Change Later)
     return (
         <Box
