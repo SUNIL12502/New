@@ -45,13 +45,13 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
 const HamburgerMenu = ()  => {
     const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(true);
   const [selected, setSelected] = useState("Dashboard");//Represents the tab which is currently selected(Change Later)
     return (
         <Box
             sx={{
                 "& .pro-sidebar-inner": {
-                    background: `${colors.primary[400]} !important`, 
+                    background: `${colors.primary[500]} !important`, 
                 },
                 "& .pro-icon-wrapper": {
                     backgroundColor: "transparent !important",
