@@ -24,7 +24,21 @@ function App() {
           </Topbar> */}
           <Routes>
             <Route path="/" element = {<LandingPage />} />
-            <Route path="/home" element = {<><Topbar className="context"/> <HamburgerMenu className="context"/></>} />
+            <Route path="/home" element = {
+            <>
+            <div className="app">
+            <HamburgerMenu />
+            <main className="context">
+            <Topbar />
+            <Dashboard />
+
+            </main>
+
+            </div>
+              
+              
+            </>
+            } />
             <Route path="/dashboard" element = {<Dashboard />} />
             <Route path="/register" element = {<Register />} />
             <Route path="/login" element = {<Login />} />
