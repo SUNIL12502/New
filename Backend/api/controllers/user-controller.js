@@ -1,4 +1,10 @@
 import * as userService from './../services/user-services.js';
+import User from '../models/User.js'
+import jwt from 'jsonwebtoken';
+
+const createToken = (_id)=>{
+    return jwt.sign({_id:_id},process.env.SECRET,{expiresIn :'3d'});
+}
 
 const setResponse = (obj, response) =>{
     response.status(200);
@@ -7,7 +13,7 @@ const setResponse = (obj, response) =>{
 
 const errorResponse = (err, response) =>{
     response.status(500);
-    response.json(err);
+    response.json({error: err.message});
 }
 
 export const index = async (req,res) =>{
@@ -47,6 +53,47 @@ export const post = async (req,res) =>{
     }
     
 }
+
+// Signup
+export const signup = async (req,res) =>{
+    try{
+        // Store Body and pass to save method
+        const {firstName, lastName,email,password} = req.body;
+        // Save method has the logic to post the user to DB
+        const savedUser = await User.signup(firstName, lastName,email,password)
+
+        // Create a token
+        const token = createToken(savedUser._id);
+        res.status(200).json({email,token})
+        
+        // setResponse(savedUser,res);
+    }
+    catch(error){
+        errorResponse(error,res);
+    }
+    
+}
+
+// Login
+export const login = async (req,res) =>{
+    try{
+        // Store Body and pass to save method
+        const {email,password} = req.body;
+        // Save method has the logic to post the user to DB
+        const savedUser = await User.login(email,password)
+
+        // Create a token
+        const token = createToken(savedUser._id);
+        res.status(200).json({email,token})
+        
+        // setResponse(savedUser,res);
+    }
+    catch(error){
+        errorResponse(error,res);
+    }
+    
+}
+
 
 export const update = async (req,res) =>{
     try{

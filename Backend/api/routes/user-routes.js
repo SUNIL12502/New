@@ -7,6 +7,12 @@ const Router = express.Router();
 // For Post
 Router.route('/')
     .post(userController.post);
+
+// Login and signup    
+Router.route('/login')
+    .post(userController.login);
+Router.route('/signup')
+    .post(userController.signup);    
     
 // For Get    
 Router.route('/')

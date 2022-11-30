@@ -5,6 +5,8 @@ import models from './models/index.js';
 import routes from './routes/index.js'
 import express from 'express';
 import { MongoClient, ServerApiVersion } from 'mongodb';
+import * as dotenv from 'dotenv' 
+dotenv.config()
 
 //Initialise our app by creating express object
 const app = express();
@@ -22,7 +24,7 @@ function database() {
         useUnifiedTopology : true
     }
     try{
-        mongoose.connect('mongodb+srv://JAMS:NEUWebDesignJAMS@stock.7r94bfe.mongodb.net/?retryWrites=true&w=majority', connectionParams);
+        mongoose.connect(process.env.MONGO_URI, connectionParams);
         console.log('Database connected successfully');
     } catch(error){
         console.log(error);
