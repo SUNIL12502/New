@@ -35,8 +35,6 @@ function App() {
             </main>
 
             </div>
-              
-              
             </>
             } />
             <Route path="/dashboard" element = {<Dashboard />} />
