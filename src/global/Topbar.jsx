@@ -13,7 +13,7 @@ import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import SearchIcon from "@mui/icons-material/Search";
 import { rows } from './../Symbol';
 import TextField from '@mui/material/TextField';
-
+import { useLogout } from './../hooks/useLogout';
 
 
 const filterOptions = createFilterOptions({
@@ -25,6 +25,13 @@ const Topbar = ()  => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
     const colorMode = useContext(ColorModeContext);
+    const { logout } = useLogout();
+    
+    async function logoutHandler(event) {
+      logout();
+    }
+
+
     return (
         <Box display="flex" justifyContent="space-between" p={2}>
             {/* //box is just like div but it is convineint (we can write css on box directly unlike div) */}
@@ -65,7 +72,7 @@ const Topbar = ()  => {
             <IconButton>
                 <SettingsOutlinedIcon />
             </IconButton>
-            <IconButton>
+            <IconButton onClick={logoutHandler}>
                 <PersonOutlinedIcon />
             </IconButton>
 

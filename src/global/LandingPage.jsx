@@ -158,6 +158,7 @@ export default function ButtonAppBar() {
     // the history stack instead of adding a new one.
 
   }
+
   return (
     <Box sx={{width:"100vw", flexGrow: 1}}>
       <AppBar position="static">
@@ -175,8 +176,12 @@ export default function ButtonAppBar() {
             Stock Portfolio Mangement
           </Typography>
           {/* <List color="inherit" sx={{ ml: "75vw" }} to="/login">Login</List> */}
-          <Button color="inherit" sx={{ ml: "75vw" }} onClick={loginHandler}>Login</Button>
-          <Button color="inherit" onClick={registerHandler}>Signup</Button>
+          <div>
+            <Button color="inherit" sx={{ ml: "75vw" }} onClick={loginHandler}>Login</Button>
+            <Button color="inherit" onClick={registerHandler}>Signup</Button>
+          </div>
+          
+          
         </Toolbar>
       </AppBar>
     </Box>
