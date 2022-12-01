@@ -10,6 +10,7 @@ import LandingPage from "./global/LandingPage";
 
 function App() {
   const [theme, colorMode] = useMode();
+  
 
   return (
     <ColorModeContext.Provider value={colorMode}>
@@ -24,10 +25,23 @@ function App() {
           </Topbar> */}
           <Routes>
             <Route path="/" element = {<LandingPage />} />
-            <Route path="/home" element = {<><Topbar className="context"/> <HamburgerMenu className="context"/></>} />
-            <Route path="/dashboard" element = {<Dashboard />} />
+            <Route path="/home" element = {
+            <>
+            <div className="app">
+            <HamburgerMenu />
+            <main className="context">
+            <div><Topbar display="flex"/></div>
+            <Dashboard />
+
+            </main>
+
+            </div>
+            </>
+            } />
+            {/* <Route path="/dashboard" element = {<Dashboard />} /> */}
             <Route path="/register" element = {<Register />} />
             <Route path="/login" element = {<Login />} />
+            {/* <Route path="/watchlist" element = {<Watchlist />} /> */}
           </Routes>
         </main>
 

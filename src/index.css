@@ -10,6 +10,11 @@ body,
   width: 100%;
   font-family: 'Source Sans Pro', sans-serif;
 }
+.context{
+  width: 100%;
+}
+
+
 
 .app{
   display: flex;

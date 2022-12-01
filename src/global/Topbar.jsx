@@ -1,4 +1,4 @@
-
+import {Typography} from "@mui/material";
 import { Box, IconButton, useTheme } from "@mui/material";
 import { useContext } from "react";
 import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
@@ -33,9 +33,17 @@ const Topbar = ()  => {
 
 
     return (
-        <Box display="flex" justifyContent="space-between" p={2}>
+        <Box display="flex" justifyContent="space-between" alignItems="center" p={2}>
             {/* //box is just like div but it is convineint (we can write css on box directly unlike div) */}
           {/* SEARCH BAR */}
+          <Typography
+          variant="h2"
+          color={colors.grey[100]}
+          fontWeight="bold"
+          sx={{ m: "5px 5px 5px 5px" }}
+            >
+              Stock Portfolio Manager
+            </Typography>
           <Box
           display="flex"
           backgroundColor={colors.primary[400]}
