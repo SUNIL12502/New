@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useSignup } from '../../hooks/useSignup.jsx'
+import { useNavigate } from "react-router-dom";
 
 const Register = ()  => {
     const [firstName, setFirstName] = useState('');
@@ -7,14 +8,16 @@ const Register = ()  => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const {signup, error, isLoading} = useSignup();
+    let navigate = useNavigate();
 
     const handleSubmit = async (e) =>{
         e.preventDefault()
-        await signup(firstName, lastName, email, password)
+        await signup(firstName, lastName, email, password);
         // setFirstName('');
         // setLastName('');
         // setEmail('');
         // setPassword('');
+        navigate("../home");
     }
     return (
         <form className="signup" onSubmit={handleSubmit}>

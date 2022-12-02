@@ -61,10 +61,13 @@ export const signup = async (req,res) =>{
         const {firstName, lastName,email,password} = req.body;
         // Save method has the logic to post the user to DB
         const savedUser = await User.signup(firstName, lastName,email,password)
-
+        const id = savedUser._id;
+        const firstNameSaved = savedUser.firstName;
+        const lastNameSaved = savedUser.lastName;
+        const balanceSaved = savedUser.balance;
         // Create a token
         const token = createToken(savedUser._id);
-        res.status(200).json({email,token})
+        res.status(200).json({email,id,firstNameSaved,lastNameSaved,balanceSaved, token})
         
         // setResponse(savedUser,res);
     }
@@ -81,10 +84,13 @@ export const login = async (req,res) =>{
         const {email,password} = req.body;
         // Save method has the logic to post the user to DB
         const savedUser = await User.login(email,password)
-
+        const id = savedUser._id;
+        const firstNameSaved = savedUser.firstName;
+        const lastNameSaved = savedUser.lastName;
+        const balanceSaved = savedUser.balance;
         // Create a token
         const token = createToken(savedUser._id);
-        res.status(200).json({email,token})
+        res.status(200).json({email,id,firstNameSaved,lastNameSaved,balanceSaved, token})
         
         // setResponse(savedUser,res);
     }

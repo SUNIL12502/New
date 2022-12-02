@@ -14,7 +14,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { rows } from './../Symbol';
 import TextField from '@mui/material/TextField';
 import { useLogout } from './../hooks/useLogout';
-
+import { useNavigate } from "react-router-dom";
 
 const filterOptions = createFilterOptions({
     matchFrom: 'any',
@@ -26,9 +26,11 @@ const Topbar = ()  => {
     const colors = tokens(theme.palette.mode);
     const colorMode = useContext(ColorModeContext);
     const { logout } = useLogout();
-    
+    let navigate = useNavigate();
+
     async function logoutHandler(event) {
       logout();
+      navigate("../");
     }
 
 
