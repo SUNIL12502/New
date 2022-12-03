@@ -24,7 +24,7 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 
 const theme = createTheme();
 
@@ -34,16 +34,15 @@ const Login = ()  => {
     const {login, error, isLoading} = useLogin();
     let navigate = useNavigate();
 
-    const handleSubmit = async (e) =>{
-        e.preventDefault()
-        // console.log(error)
-
-        await login(email,password)
-       
-    //     {if({!error}){
-    //         navigate("../home")
-    // }}
-         navigate("../home");
+    const handleSubmit = async (event) =>{
+        event.preventDefault()
+        // const error = await login(email,password)
+        const isLoggedIn = await login(email,password)
+        // console.log(isLoggedIn);    
+        // if(isLoggedIn){
+        //     navigate("../home")
+        // }
+        isLoggedIn?navigate("../home"):navigate("../login")
     }
     return (
         <ThemeProvider theme={theme}>
@@ -96,7 +95,9 @@ const Login = ()  => {
                 >
                     Log In
                 </Button>
-                {error && <div className="error">{error}</div>}
+                {error && <><div className="error">{error}</div><Navigate to="/login" replace={true} /></>}
+                {/* {!error && <Navigate to="/home" replace={true}/>} */}
+                {/* {login && (<Navigate to="/login" replace={true} />)} */}
             </Box>
             {/* <form className="login" onSubmit={handleSubmit}>
                 <h3>Log In</h3>
