@@ -6,7 +6,10 @@ import HamburgerMenu from "./global/HamburgerMenu";
 import Dashboard from "./scenes/dashboard";
 import Login from "./scenes/login/Login";
 import Register from "./scenes/register/Register";
-import LandingPage from "./global/LandingPage";
+import WatchList from "./scenes/dashboard/watchlist";
+import News from "./data/News/News"
+import Details from "./scenes/dashboard/details";
+
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -21,10 +24,10 @@ function App() {
         {/* <HamburgerMenu /> */}
         <main className="context">
           
-          {/* <Topbar>
+          {/* <Topbar className="abc">
           </Topbar> */}
           <Routes>
-            <Route path="/" element = {<LandingPage />} />
+            {/* <Route path="/" element = {<LandingPage />} /> */}
             <Route path="/home" element = {
             <>
             <div className="app">
@@ -40,6 +43,10 @@ function App() {
             } />
             {/* <Route path="/dashboard" element = {<Dashboard />} /> */}
             <Route path="/register" element = {<Register />} />
+            <Route path="/watchlist" element = {<WatchList />} />
+            <Route path="/details" element = {<Details />} />
+
+
             <Route path="/login" element = {<Login />} />
             {/* <Route path="/watchlist" element = {<Watchlist />} /> */}
           </Routes>
