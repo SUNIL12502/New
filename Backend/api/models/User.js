@@ -15,6 +15,7 @@ const userSchema = new mongoose.Schema({
         type:String,
         unique:true,
         required: 'Email field is required',
+
     },
     password:{
         type: String,
@@ -24,6 +25,7 @@ const userSchema = new mongoose.Schema({
         type: Number,
         default: "500000",
     }
+    
 },{versionKey: false });
 
 

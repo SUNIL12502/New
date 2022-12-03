@@ -11,18 +11,40 @@ import TablePagination from "@mui/material/TablePagination";
 import { rows } from "../../indData";
 import { useNavigate } from "react-router-dom";
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import { useState } from "react";
+
+
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 
 const Dashboard = ()  => {
+  const {user}= useAuthContext();
+   
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
     const history = useNavigate();
 
-    async function onAdd(props) {
+    async function OnAdd(props) {
         console.log("Button pressed");
-        history("/watchlist");
+        const item={
+          userId:user.id,
+          symbol:props.symbol,
+          name:props.description
+
+        }
         
-    }
+       
+      const url = "http://localhost:8080/temp/";
+      const response = await fetch (url, {
+        method: 'POST',
+        headers:{'Content-Type':'application/json'},
+        
+        body: JSON.stringify(item)
+      })
+      const json = await response.json()
+      history("/watchlist");       
+}
+
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
       };
@@ -58,7 +80,7 @@ const Dashboard = ()  => {
                     type="submit"
                     value={row}
                     aria-label="fingerprint"
-                    onClick={() => onAdd(row)}
+                    onClick={() => OnAdd(row)}
                     color="success"
                   >
                     

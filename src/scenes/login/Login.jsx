@@ -43,7 +43,7 @@ const Login = ()  => {
     //     {if({!error}){
     //         navigate("../home")
     // }}
-    isLoggedIn?navigate('/home'):navigate('/login')
+    isLoggedIn?navigate('../home'):navigate('../login')
     }
     return (
         <ThemeProvider theme={theme}>
