@@ -11,6 +11,7 @@ const changeBalance = async(user,newBalance) =>{
 // function to buy and sell stocks
 export const order = async (id, newOrder) => {
     const user = await User.findById(id);
+    console.log(newOrder)
     const trade = new Trade(newOrder)
 
     // if the trade type is BUY
@@ -46,12 +47,14 @@ export const order = async (id, newOrder) => {
     }
 }
 
+// Function to get all trades for a user
 export const getAllTrades = async(id) => {
     const user = await User.findById(id);
     const trades = await Trade.find({ userId : user.id}).exec();
     return trades
 }
 
+// function to get the portfolio of the user
 export const getPortfolio = async(id) => {
     const user = await User.findById(id);
     const trades = await Trade.find({ userId : user.id}).exec();
@@ -61,30 +64,28 @@ export const getPortfolio = async(id) => {
         let tempObj = portfolio.find(({ symbol }) => symbol === item.symbol)
         if(tempObj){
             if(item.tradeType === "BUY"){
-                tempObj.buyValue += item.shares*item.price;
-                tempObj.buyShares += item.shares;
+                tempObj.holdingValue += item.shares*item.price;
+                tempObj.holdingShares += item.shares;
             }
             else{
-                tempObj.sellValue += item.shares*item.price;
-                tempObj.sellShares += item.shares;
+                tempObj.holdingValue -= item.shares*item.price;
+                tempObj.holdingShares -= item.shares;
             }  
         }
         else{
             let newObj = {
                 symbol : item.symbol,
-                buyValue : 0,
-                buyShares : 0,
-                sellValue : 0,
-                sellShares : 0
+                holdingValue : 0,
+                holdingShares : 0
             }
 
             if(item.tradeType === "BUY"){
-                newObj.buyValue += item.shares*item.price;
-                newObj.buyShares += item.shares;
+                newObj.holdingValue += item.shares*item.price;
+                newObj.holdingShares += item.shares;
             }
             else{
-                newObj.sellValue += item.shares*item.price;
-                newObj.sellShares += item.shares;
+                newObj.holdingValue -= item.shares*item.price;
+                newObj.holdingShares -= item.shares;
             }  
 
             portfolio.push(newObj);
@@ -92,50 +93,22 @@ export const getPortfolio = async(id) => {
 
     }
     let finalPortfolio = []
-    console.log(portfolio)
+    // console.log(portfolio)
     portfolio.forEach(portfolioCreation);
     function portfolioCreation(item){
-        if(item.buyShares>item.sellShares){
-            let itemVal = {
+
+        if(item.holdingShares>0){
+            const itemVal = {
                 userId:id,
-                symbol:item.symbol,
-                price:item.buyValue/item.buyShares,
-                shares:buyShares-sellShares,
-                tradeType:"BUY"
+                symbol : item.symbol,
+                price : item.holdingValue/item.holdingShares,
+                shares : item.holdingShares,
             }
-            console.log(itemVal)
-            let newTradeItem = new Trade(itemVal);
-            console.log(newTradeItem)
-            finalPortfolio.push(newTradeItem);
+            // console.log(itemVal)
+            finalPortfolio.push(itemVal);
         }
     }
     // console.log(portfolio)
     return finalPortfolio
 }
 
-
-
-
-// function to featch all task items
-// export const getUser = async () =>{
-//     const tasks = Task.find({});
-//     return tasks;
-// }
-
-// // function to fetch items by ID
-// export const search = async (id) =>{
-//     const task = Task.findById(id);
-//     return task;
-// }
-
-// // function to delete item by ID
-// export const remove = async (id) =>{
-//     const task = Task.findByIdAndDelete(id);
-//     return task;
-// }
-
-// // function to update item by ID
-// export const update = async (id, updTask) =>{
-//     const task = Task.findByIdAndUpdate(id,updTask);
-//     return task;
-// }

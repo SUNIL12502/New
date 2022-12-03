@@ -9,6 +9,7 @@ import Register from "./scenes/register/Register";
 import WatchList from "./scenes/dashboard/watchlist";
 import News from "./data/News/News"
 import Details from "./scenes/dashboard/details";
+import LandingPage from "./global/LandingPage"
 
 
 function App() {
@@ -27,7 +28,7 @@ function App() {
           {/* <Topbar className="abc">
           </Topbar> */}
           <Routes>
-            {/* <Route path="/" element = {<LandingPage />} /> */}
+            <Route path="/" element = {<LandingPage />} />
             <Route path="/home" element = {
             <>
             <div className="app">
