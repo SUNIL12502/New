@@ -1,3 +1,4 @@
 import User from './User.js';
+import Trade from './Trade.js';
 
-export default { User };
+export default { User, Trade };
