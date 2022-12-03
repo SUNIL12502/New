@@ -16,10 +16,6 @@ body,
 .context{
   width:100%
 }
-.abc{
-  position: fixed;
-  z-index: 1;
-}
 
 .app{
   display: flex;

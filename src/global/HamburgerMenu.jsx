@@ -25,6 +25,7 @@ import { useAuthContext } from '../hooks/useAuthContext.jsx';
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
+  
   const colors = tokens(theme.palette.mode);
   return (
     <MenuItem
@@ -115,6 +116,7 @@ const HamburgerMenu = ()  => {
                   fontWeight="bold"
                   sx={{ m: "10px 0 0 0" }}
                 >
+                  
                 {user.firstNameSaved}
                 </Typography>
                 <Typography variant="h5" color={colors.greenAccent[500]}>

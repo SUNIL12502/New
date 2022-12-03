@@ -12,11 +12,17 @@ import Header from "../../components/Headers";
 import { useEffect,useState } from "react";
 import { useNavigate } from 'react-router-dom';
 
+import {useAuthContext } from "../../hooks/useAuthContext.jsx"
+
 
 
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
+
+
 const Team = () => {
+
+  const {user}= useAuthContext();
   const history = useNavigate();
 
     const [abc,setAbc]=useState([])
@@ -66,6 +72,7 @@ const Team = () => {
         headerName: "Buy",
         sortable: false,
         renderCell: (params) => {
+          console.log(user)
             const Add = (e) => {
               e.stopPropagation(); // don't select this row after clicking
               
@@ -85,6 +92,7 @@ const Team = () => {
       
             return <Button onClick={Add} variant="contained" color="success">Buy</Button>;
           },
+         
         
       },
       {

@@ -34,15 +34,16 @@ const Login = ()  => {
     const {login, error, isLoading} = useLogin();
     let navigate = useNavigate();
 
-    const handleSubmit = async (event) =>{
-        event.preventDefault()
-        // const error = await login(email,password)
-        const isLoggedIn = await login(email,password)
-        // console.log(isLoggedIn);    
-        // if(isLoggedIn){
-        //     navigate("../home")
-        // }
-        isLoggedIn?navigate("../home"):navigate("../login")
+    const handleSubmit = async (e) =>{
+        e.preventDefault()
+        // console.log(error)
+
+        const isLoggedIn= await login(email,password)
+       
+    //     {if({!error}){
+    //         navigate("../home")
+    // }}
+    isLoggedIn?navigate('/home'):navigate('/login')
     }
     return (
         <ThemeProvider theme={theme}>

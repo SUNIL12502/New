@@ -44,7 +44,19 @@ function App() {
             } />
             {/* <Route path="/dashboard" element = {<Dashboard />} /> */}
             <Route path="/register" element = {<Register />} />
-            <Route path="/watchlist" element = {<WatchList />} />
+            <Route path="/watchlist" element = {
+               <>
+               <div className="app">
+               <HamburgerMenu />
+               <main className="context">
+               <div><Topbar display="flex"/></div>
+               <WatchList />
+   
+               </main>
+   
+               </div>
+               </>
+            } />
             <Route path="/details" element = {<Details />} />
 
 

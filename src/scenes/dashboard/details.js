@@ -12,19 +12,26 @@ import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import Button from '@mui/material/Button';
 
+import {useAuthContext } from "../../hooks/useAuthContext.jsx"
+
 
 
 
 
 function DashboardContent() {
 
+const {user}= useAuthContext();
+
   const history = useNavigate();
   const location = useLocation();
+
+
+
 if(location.state.Symbol===null)
 {
   history('/');
 }
-location.state.Symbol="TSLA"
+location.state.Symbol="AMZN"
 
   function AdvanceChart(props)
   {
