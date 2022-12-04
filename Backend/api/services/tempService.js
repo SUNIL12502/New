@@ -1,4 +1,5 @@
 import temp from './../models/temp.js';
+import User from './../models/User.js'
 
 // Add a user
 export const save = async (Temp) =>{
@@ -17,6 +18,13 @@ export const search = async (query) =>{
     const params = {...query};
     const user = temp.find(params).exec();
     return user;
+}
+
+
+export const getWatchlist = async(id) => {
+    const user = await User.findById(id);
+    const watchlist = await temp.find({ userId : user.id}).exec();
+    return watchlist
 }
 
 // // Find Todo

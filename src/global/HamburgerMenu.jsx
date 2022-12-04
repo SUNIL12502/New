@@ -146,7 +146,7 @@ const HamburgerMenu = ()  => {
             </Typography>
             <Item
               title="Watchlist"
-              to="/team"
+              to="/watchlist"
               icon={<AccountBalanceSharpIcon />}
               selected={selected}
               setSelected={setSelected}

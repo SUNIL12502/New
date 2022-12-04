@@ -27,6 +27,22 @@ const errorResponse = (err, response) =>{
 //     }
 // }
 
+
+
+//get all watclist for an user
+
+export const getWatchlist = async (request,response) => {
+    try{
+        const id = request.params.id
+        const watchlist = await tempService.getWatchlist(id);
+        setResponse(watchlist,response); // if above promise is successfull
+    } catch(error){
+        errorResponse(error,response); // if above promise is not successfull
+    }
+    
+}
+
+
 export const get = async (req,res) =>{
     try{
         // Find method in service helps to get all todos

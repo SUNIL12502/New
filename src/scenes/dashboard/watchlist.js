@@ -1,4 +1,4 @@
-import { Box, Typography, useTheme,Button } from "@mui/material";
+import { Box, Typography, useTheme, Button } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
 import Icon from "@mui/material/Icon";
@@ -6,39 +6,75 @@ import { mockDataTeam } from "../../data/mockData";
 import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
 import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
-import DeleteIcon from '@mui/icons-material/Delete';
+import DeleteIcon from "@mui/icons-material/Delete";
 import Header from "../../components/Headers";
 // import { abc } from "../../mockData";
-import { useEffect,useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useAuthContext } from "../../hooks/useAuthContext.jsx";
 
-import {useAuthContext } from "../../hooks/useAuthContext.jsx"
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import { CleaningServices } from "@mui/icons-material";
 
-
-
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-
-
-
-const Team = () => {
-
-  const {user}= useAuthContext();
+const Watchlist = () => {
+  const { user } = useAuthContext();
   const history = useNavigate();
 
-    const [abc,setAbc]=useState([])
+  
+  const [abc, setAbc] = useState([]);
+  const [rows, setRows] = useState([]);
 
-    useEffect(()=>{
-        fetch("https://finnhub.io/api/v1/stock/insider-transactions?symbol=UHAL&token=c94i99aad3if4j50rvn0")
-        .then(response=>response.json())
-        // .then(response=>console.log(response))
-        .then(response=>setAbc(response.data))
-    },[])
+ 
+  const url = "http://localhost:8080/temp/".concat(user.id);
+  console.log(url);
 
+  let temp = [];
+  async function fetchData() {
+    await fetch(url)
+      .then((response) => response.json())
+      .then((response) => {
+        setAbc(response);
+      });
+    console.log(abc);
+    for (var key in abc) {
+      if (!abc.hasOwnProperty(key)) continue;
+      let newData = [];
+      const url = "https://finnhub.io/api/v1/quote?symbol=".concat(
+        abc[key].symbol,
+        "&token=c94i99aad3if4j50rvn0"
+      );
+      await axios
+        .get(url)
+        .then((res) => {
+          const pData = res.data;
+          newData.push(pData);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      console.log(newData);
+
+      const ab = {
+        id: abc[key].symbol,
+        name: abc[key].name,
+        symbol: abc[key].symbol,
+        today: newData[0]["c"],
+        Percent: newData[0]["dp"],
+      };
+      // console.log(pData[key].name)
+      temp.push(ab);
+    }
+    setRows(temp);
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, [rows]);
 
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const columns = [
-    
     {
       field: "name",
       headerName: " Company Name",
@@ -46,142 +82,141 @@ const Team = () => {
       cellClassName: "name-column--cell",
     },
     {
-        field: "symbol",
-        headerName: "Symbol",
-        flex: 0.5, 
-        cellClassName: "symbol-column--cell",
-      },
+      field: "symbol",
+      headerName: "Symbol",
+      flex: 0.5,
+      cellClassName: "symbol-column--cell",
+    },
     {
       field: "today",
       headerName: "Today",
-      flex: 0.5, 
+      flex: 0.5,
       type: "number",
       headerAlign: "left",
-      align: "left"
+      align: "left",
     },
     {
       field: "Percent",
       headerName: "Percent",
-      flex: 0.5, 
+      flex: 0.5,
       type: "number",
       headerAlign: "left",
-      align: "left"
+      align: "left",
     },
     {
-        field: "Buy",
-        headerName: "Buy",
-        sortable: false,
-        renderCell: (params) => {
-          console.log(user)
-            const Add = (e) => {
-              e.stopPropagation(); // don't select this row after clicking
-              
-              const api: GridApi = params.api;
-              const thisRow: Record<string, GridCellValue> = {};
-          
-              api
-                .getAllColumns()
-                .filter((c) => c.field !== '__check__' && !!c)
-                .forEach(
-                  (c) => (thisRow[c.field] = params.getValue(params.id, c.field)),
-                );
-                //console.log(thisRow)
-            //     history('/addStock',{state:thisRow});
-              return 
-            };
-      
-            return <Button onClick={Add} variant="contained" color="success">Buy</Button>;
-          },
-         
-        
+      field: "Buy",
+      headerName: "Buy",
+      sortable: false,
+      renderCell: (params) => {
+       
+        const Add = (e) => {
+          e.stopPropagation(); // don't select this row after clicking
+
+          const api: GridApi = params.api;
+          const thisRow: Record<string, GridCellValue> = {};
+
+          api
+            .getAllColumns()
+            .filter((c) => c.field !== "__check__" && !!c)
+            .forEach(
+              (c) => (thisRow[c.field] = params.getValue(params.id, c.field))
+            );
+          //console.log(thisRow)
+          //     history('/addStock',{state:thisRow});
+          return;
+        };
+
+        return (
+          <Button onClick={Add} variant="contained" color="success">
+            Buy
+          </Button>
+        );
       },
-      {
-        field: "Sell",
-        headerName: "Sell",
-        sortable: false,
-        renderCell: (params) => {
-            const Remove = (e) => {
-              e.stopPropagation(); // don't select this row after clicking
-      
-              const api: GridApi = params.api;
-              const thisRow: Record<string, GridCellValue> = {};
-      
-              api
-                .getAllColumns()
-                .filter((c) => c.field !== '__check__' && !!c)
-                .forEach(
-                  (c) => (thisRow[c.field] = params.getValue(params.id, c.field)),
-                );
-      
-              return alert(JSON.stringify(thisRow.name, null, 4));
-            return
-            };
-      
-            return <Button  onClick={Remove} variant="outlined" color="error">Sell</Button>;
-          },
-        
+    },
+    {
+      field: "Sell",
+      headerName: "Sell",
+      sortable: false,
+      renderCell: (params) => {
+        const Remove = (e) => {
+          e.stopPropagation(); // don't select this row after clicking
+
+          const api: GridApi = params.api;
+          const thisRow: Record<string, GridCellValue> = {};
+
+          api
+            .getAllColumns()
+            .filter((c) => c.field !== "__check__" && !!c)
+            .forEach(
+              (c) => (thisRow[c.field] = params.getValue(params.id, c.field))
+            );
+
+          return alert(JSON.stringify(thisRow.name, null, 4));
+          return;
+        };
+
+        return (
+          <Button onClick={Remove} variant="outlined" color="error">
+            Sell
+          </Button>
+        );
       },
-      
-      {
-        field: "Delete",
-        headerName: "Delete",
-        sortable: false,
+    },
+
+    {
+      field: "Delete",
+      headerName: "Delete",
+      sortable: false,
       renderCell: (params) => {
         const Delete = (e) => {
-            e.stopPropagation(); // don't select this row after clicking
-    
-            const api: GridApi = params.api;
-            const thisRow: Record<string, GridCellValue> = {};
-    
-            api
-              .getAllColumns()
-              .filter((c) => c.field !== '__check__' && !!c)
-              .forEach(
-                (c) => (thisRow[c.field] = params.getValue(params.id, c.field)),
-              );
-           
-    
-            return alert(JSON.stringify(thisRow.name, null, 4));
-          };
-  
+          e.stopPropagation(); // don't select this row after clicking
+
+          const api: GridApi = params.api;
+          const thisRow: Record<string, GridCellValue> = {};
+
+          api
+            .getAllColumns()
+            .filter((c) => c.field !== "__check__" && !!c)
+            .forEach(
+              (c) => (thisRow[c.field] = params.getValue(params.id, c.field))
+            );
+
+          return alert(JSON.stringify(thisRow.name, null, 4));
+        };
+
         return <DeleteIcon onClick={Delete}></DeleteIcon>;
-      },},
-      {
-        field: "Details",
-        headerName: "Details",
-        sortable: false,
+      },
+    },
+    {
+      field: "Details",
+      headerName: "Details",
+      sortable: false,
       renderCell: (params) => {
         const Details = (e) => {
           e.stopPropagation(); // don't select this row after clicking
-  
+
           const api: GridApi = params.api;
           const thisRow: Record<string, GridCellValue> = {};
-  
+
           api
             .getAllColumns()
-            .filter((c) => c.field !== '__check__' && !!c)
+            .filter((c) => c.field !== "__check__" && !!c)
             .forEach(
-              (c) => (thisRow[c.field] = params.getValue(params.id, c.field)),
+              (c) => (thisRow[c.field] = params.getValue(params.id, c.field))
             );
-            console.log(thisRow);
-            history('/details',{state:thisRow});
-          return 
+          console.log(thisRow);
+          history("/details", { state: thisRow });
+          return;
         };
-  
-        return <AddCircleOutlineIcon onClick={Details}></AddCircleOutlineIcon>;
-      },
-        
-      },
-     
 
-
-    
+        return <AddCircleOutlineIcon onClick={Details} ></AddCircleOutlineIcon>;
+      },
+    },
   ];
 
   return (
-    
     <Box m="20px">
-      <Header title="Watchlist"  />
+      <Header title="Watchlist" />
       <Box
         m="40px 0 0 0"
         height="75vh"
@@ -211,12 +246,14 @@ const Team = () => {
           },
         }}
       >
-        <DataGrid  rows={abc} columns={columns} components={{ Toolbar:GridToolbar}} />
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          components={{ Toolbar: GridToolbar }}
+        />
       </Box>
     </Box>
   );
 };
 
-export default Team;
-
-
+export default Watchlist;

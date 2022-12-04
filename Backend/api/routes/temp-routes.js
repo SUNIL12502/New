@@ -8,7 +8,10 @@ const Router = express.Router();
 Router.route('/')
     .post(tempController.post);
 
-// Login and signup    
+
+    
+Router.route('/:id')
+    .get(tempController.getWatchlist);
  
     
 // For Get    
