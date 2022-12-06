@@ -11,7 +11,8 @@ Router.route('/')
 
     
 Router.route('/:id')
-    .get(tempController.getWatchlist);
+    .get(tempController.getWatchlist)
+    .delete(tempController.remove);
  
     
 // For Get    

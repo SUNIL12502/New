@@ -9,32 +9,37 @@ import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Header from "../../components/Headers";
 // import { abc } from "../../mockData";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useAuthContext } from "../../hooks/useAuthContext.jsx";
-
+// import { useAuthContext } from "../../hooks/useAuthContext.jsx";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { CleaningServices } from "@mui/icons-material";
+import React from "react";
 
 const Watchlist = () => {
-  const { user } = useAuthContext();
+  // const { user } = useAuthContext();
+  const user = JSON.parse(localStorage.getItem("user"));
+  console.log(user);
   const history = useNavigate();
-
-  
-  const [abc, setAbc] = useState([]);
+  // const [abc, setAbc] = useState([]);
   const [rows, setRows] = useState([]);
 
- 
-  const url = "http://localhost:8080/temp/".concat(user.id);
-  console.log(url);
+  // const [rows: GridRowsProp, setRows] = React.useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  let temp = [];
-  async function fetchData() {
+  const url = "http://localhost:8080/temp/".concat(user.id);
+  // console.log(url);
+
+  const fetchData = async () => {
+    let abc = [];
+    const temp = [];
+
     await fetch(url)
       .then((response) => response.json())
+      // .then((response) => setAbc(response));
       .then((response) => {
-        setAbc(response);
+        response.map((d) => abc.push(d));
       });
     console.log(abc);
     for (var key in abc) {
@@ -56,21 +61,33 @@ const Watchlist = () => {
       console.log(newData);
 
       const ab = {
-        id: abc[key].symbol,
+        id: abc[key]._id,
         name: abc[key].name,
         symbol: abc[key].symbol,
+        delete: abc[key]._id,
+        ids: abc[key]._id,
         today: newData[0]["c"],
-        Percent: newData[0]["dp"],
+        Percent: newData[0]["dp"] + " %",
+        open: newData[0]["o"],
+        high: newData[0]["h"],
+        low: newData[0]["l"],
+        close: newData[0]["pc"],
       };
       // console.log(pData[key].name)
       temp.push(ab);
     }
-    setRows(temp);
-  }
+    console.log(temp);
+    const s = new Set(temp);
+    console.log(s);
+    setRows(Array.from(s));
+    // setIsLoading(false);
+  };
 
   useEffect(() => {
+    // abc = [];
+    // temp = [];
     fetchData();
-  }, [rows]);
+  }, []);
 
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -88,8 +105,17 @@ const Watchlist = () => {
       cellClassName: "symbol-column--cell",
     },
     {
+      field: "ids",
+      headerName: "ids",
+      hide: true,
+      flex: 0.5,
+
+      cellClassName: "symbol-column--cell",
+    },
+
+    {
       field: "today",
-      headerName: "Today",
+      headerName: "Current Price",
       flex: 0.5,
       type: "number",
       headerAlign: "left",
@@ -97,18 +123,50 @@ const Watchlist = () => {
     },
     {
       field: "Percent",
-      headerName: "Percent",
+      headerName: "Percent Chamge",
       flex: 0.5,
       type: "number",
       headerAlign: "left",
       align: "left",
     },
     {
+      field: "open",
+      headerName: "Open",
+      flex: 0.3,
+      type: "number",
+      headerAlign: "left",
+      align: "left",
+    },
+    {
+      field: "high",
+      headerName: "High",
+      flex: 0.3,
+      type: "number",
+      headerAlign: "left",
+      align: "left",
+    },
+    {
+      field: "low",
+      headerName: "Low",
+      flex: 0.3,
+      type: "number",
+      headerAlign: "left",
+      align: "left",
+    },
+    {
+      field: "close",
+      headerName: "Close",
+      flex: 0.3,
+      type: "number",
+      headerAlign: "left",
+      align: "left",
+    },
+
+    {
       field: "Buy",
       headerName: "Buy",
       sortable: false,
       renderCell: (params) => {
-       
         const Add = (e) => {
           e.stopPropagation(); // don't select this row after clicking
 
@@ -166,6 +224,7 @@ const Watchlist = () => {
     {
       field: "Delete",
       headerName: "Delete",
+
       sortable: false,
       renderCell: (params) => {
         const Delete = (e) => {
@@ -181,7 +240,22 @@ const Watchlist = () => {
               (c) => (thisRow[c.field] = params.getValue(params.id, c.field))
             );
 
-          return alert(JSON.stringify(thisRow.name, null, 4));
+          async function deleteRow() {
+            await fetch("http://localhost:8080/temp/".concat(thisRow.ids), {
+              method: "DELETE",
+            });
+            for (var key in rows) {
+              const a = rows[key];
+              setRows((rows) => rows.filter((a) => a.ids != thisRow.ids));
+            }
+          }
+          deleteRow();
+
+          // console.log(thisRow);
+          // return alert(
+          //   JSON.stringify(thisRow.symbol, null, 4) + " " + "Deleted"
+          // );
+          // //
         };
 
         return <DeleteIcon onClick={Delete}></DeleteIcon>;
@@ -209,50 +283,55 @@ const Watchlist = () => {
           return;
         };
 
-        return <AddCircleOutlineIcon onClick={Details} ></AddCircleOutlineIcon>;
+        return <AddCircleOutlineIcon onClick={Details}></AddCircleOutlineIcon>;
       },
     },
   ];
 
   return (
-    <Box m="20px">
-      <Header title="Watchlist" />
-      <Box
-        m="40px 0 0 0"
-        height="75vh"
-        sx={{
-          "& .MuiDataGrid-root": {
-            border: "none",
-          },
-          "& .MuiDataGrid-cell": {
-            borderBottom: "none",
-          },
-          "& .name-column--cell": {
-            color: colors.greenAccent[300],
-          },
-          "& .MuiDataGrid-columnHeaders": {
-            backgroundColor: colors.blueAccent[700],
-            borderBottom: "none",
-          },
-          "& .MuiDataGrid-virtualScroller": {
-            backgroundColor: colors.primary[400],
-          },
-          "& .MuiDataGrid-footerContainer": {
-            borderTop: "none",
-            backgroundColor: colors.blueAccent[700],
-          },
-          "& .MuiCheckbox-root": {
-            color: `${colors.greenAccent[200]} !important`,
-          },
-        }}
-      >
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          components={{ Toolbar: GridToolbar }}
-        />
+    <>
+      {/* {isLoading && <h1>Loading Data...</h1>} */}
+      <Box m="20px">
+        <Header title="Watchlist" />
+        <Box
+          m="40px 0 0 0"
+          height="75vh"
+          sx={{
+            "& .MuiDataGrid-root": {
+              border: "none",
+            },
+            "& .MuiDataGrid-cell": {
+              borderBottom: "none",
+            },
+            "& .name-column--cell": {
+              color: colors.greenAccent[300],
+            },
+            "& .MuiDataGrid-columnHeaders": {
+              backgroundColor: colors.blueAccent[700],
+              borderBottom: "none",
+            },
+            "& .MuiDataGrid-virtualScroller": {
+              backgroundColor: colors.primary[400],
+            },
+            "& .MuiDataGrid-footerContainer": {
+              borderTop: "none",
+              backgroundColor: colors.blueAccent[700],
+            },
+            "& .MuiCheckbox-root": {
+              color: `${colors.greenAccent[200]} !important`,
+            },
+          }}
+        >
+          {rows && (
+            <DataGrid
+              rows={rows}
+              columns={columns}
+              components={{ Toolbar: GridToolbar }}
+            />
+          )}
+        </Box>
       </Box>
-    </Box>
+    </>
   );
 };
 

@@ -42,7 +42,9 @@ export const getWatchlist = async(id) => {
 // }
 
 // // Remove Todo
-// export const remove = async (id) =>{
-//     const removeUser = User.findByIdAndRemove(id);
-//     return removeUser;
-// }
+export const remove =  (id) =>{
+    temp.findByIdAndDelete(id).exec();    
+    return remove;
+}
+
+

@@ -15,19 +15,15 @@ import { useEffect, useState } from "react";
 
 import { useAuthContext } from "../../hooks/useAuthContext.jsx";
 
-const DashboardContent=(props)=> {
-  
+const DashboardContent = () => {
   const history = useNavigate();
   const location = useLocation();
 
-
- 
-  if (location.state.Symbol === null) {
+  if (location.state.symbol === null) {
     history("/");
   }
-  
-  console.log( props)
 
+  console.log(location.state.symbol);
 
   // function AdvanceChart(props) {
   //   console.log("CALLING LIGHT WEIGHT CHART", props);
@@ -36,7 +32,7 @@ const DashboardContent=(props)=> {
   return (
     <>
       {/* Chart */}
-      <Grid item xs={12} md={8} lg={9}>
+      {/* <Grid item xs={12} md={8} lg={9}>
         <Paper
           sx={{
             p: 2,
@@ -45,9 +41,9 @@ const DashboardContent=(props)=> {
             height: 240,
           }}
         >
-          <Chart symbol={location.state.Symbol} />
+          <Chart symbol={location.state.symbol} />
         </Paper>
-      </Grid>
+      </Grid> */}
       {/* Recent Deposits */}
       <Grid item xs={12} md={4} lg={3}>
         <Paper
@@ -58,23 +54,24 @@ const DashboardContent=(props)=> {
             height: 240,
           }}
         >
-          <Quotes symbol={location.state.Symbol} />
+          <Quotes symbol={location.state.symbol} />
         </Paper>
       </Grid>
       {/* Recent Orders */}
-      <Grid item xs={12}>
-        <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-          <Orders symbol={location.state.Symbol} />
-        </Paper>
-      </Grid>
+
       {/* Recent Orders */}
 
       {/* Recent Orders */}
       <Grid item xs={12}>
         <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
           <Suspense fallback={<h1>Loading profile...</h1>}>
-            <TradingWidget symbol={location.state.Symbol} />
+            <TradingWidget symbol={location.state.symbol} />
           </Suspense>
+        </Paper>
+      </Grid>
+      <Grid item xs={12}>
+        <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
+          <Orders symbol={location.state.symbol} />
         </Paper>
       </Grid>
       {/* Recent Orders */}
@@ -86,10 +83,10 @@ const DashboardContent=(props)=> {
         </Paper>
       </Grid> */}
       {/* Recent Deposits */}
-      <NewsLoad symbol={location.state.Symbol} basic="company-news?symbol=" />
+      <NewsLoad symbol={location.state.symbol} basic="company-news?symbol=" />
     </>
   );
-}
+};
 
 export default function NewDashboard(async) {
   return (

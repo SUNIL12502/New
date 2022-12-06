@@ -1,5 +1,5 @@
 import * as React from "react";
-import Header from "../../components/Header"
+import Header from "../../components/Header";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -8,55 +8,69 @@ import TableRow from "@mui/material/TableRow";
 import IconButton from "@mui/material/IconButton";
 import Fingerprint from "@mui/icons-material/Fingerprint";
 import TablePagination from "@mui/material/TablePagination";
-import { rows } from "../../indData";
+import { rows } from "../../finalStockData";
 import { useNavigate } from "react-router-dom";
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { useState } from "react";
-
+import axios from "axios";
 
 import { useAuthContext } from "../../hooks/useAuthContext";
 
+const Dashboard = () => {
+  const { user } = useAuthContext();
 
-const Dashboard = ()  => {
-  const {user}= useAuthContext();
-   
-    const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(10);
-    const history = useNavigate();
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const history = useNavigate();
 
-    async function OnAdd(props) {
-        console.log("Button pressed");
-        const item={
-          userId:user.id,
-          symbol:props.symbol,
-          name:props.description
+  async function OnAdd(props) {
+    console.log("Button pressed");
+    const item = {
+      userId: user.id,
+      symbol: props.symbol,
+      name: props.description,
+    };
 
-        }
-        
-       
-      const url = "http://localhost:8080/temp/";
-      const response = await fetch (url, {
-        method: 'POST',
-        headers:{'Content-Type':'application/json'},
-        
-        body: JSON.stringify(item)
+    const url = "http://localhost:8080/temp/";
+
+    await axios
+      .post(url, {
+        userId: user.id,
+        symbol: props.symbol,
+        name: props.description,
       })
-      const json = await response.json()
-      history("/watchlist");       
-}
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
-    const handleChangePage = (event, newPage) => {
-        setPage(newPage);
-      };
-      const handleChangeRowsPerPage = (event) => {
-        setRowsPerPage(+event.target.value);
-        setPage(0);
-      };
+    // const response = await fetch(url, {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
 
-    return (
-        <>
-        <Header title="Stock Listings With Symbols" subtitle="Welcome to home page" />
-        <Table size="medium">
+    //   body: JSON.stringify(item),
+    // });
+    // const json = await response.json();
+    history("../watchlist");
+  }
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
+
+  return (
+    <>
+      <Header
+        title="Stock Listings With Symbols"
+        subtitle="Welcome to home page"
+      />
+      <Table size="medium">
         <TableHead>
           <TableRow>
             <TableCell>Description</TableCell>
@@ -82,9 +96,7 @@ const Dashboard = ()  => {
                     aria-label="fingerprint"
                     onClick={() => OnAdd(row)}
                     color="success"
-                  >
-                    
-                  </AddCircleOutlineIcon>
+                  ></AddCircleOutlineIcon>
                 </TableCell>
               </TableRow>
             ))}
@@ -99,9 +111,8 @@ const Dashboard = ()  => {
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
-      </>
-
-    )
-}
+    </>
+  );
+};
 
 export default Dashboard;

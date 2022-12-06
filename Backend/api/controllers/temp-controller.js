@@ -43,6 +43,19 @@ export const getWatchlist = async (request,response) => {
 }
 
 
+// remove function to call the remove function in service layer, this function will delete a task item by ID.
+export const remove = async (request,response) => {
+    try{
+        const id = request.params.id;
+        const tasks = await tempService.remove(id);
+        setResponse(tasks,response); // if above promise is successfull
+    } catch(error){
+        errorResponse(error,response); // if above promise is not successfull
+    }
+    
+}
+
+
 export const get = async (req,res) =>{
     try{
         // Find method in service helps to get all todos
