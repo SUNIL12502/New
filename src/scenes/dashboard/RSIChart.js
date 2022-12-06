@@ -24,15 +24,23 @@ export default function Chart(props) {
   const lastYear = Math.ceil(
     new Date(new Date().getTime() - 10 * 24 * 60 * 60 * 1000).getTime() / 1000
   );
-  const url = "https://finnhub.io/api/v1/stock/candle?symbol=".concat(
-    props.symbol,
-    "&resolution=D&from=",
-    lastYear,
-    "&to=",
-    today,
-    "&token=c94i99aad3if4j50rvn0"
-  );
+  // const url = "https://finnhub.io/api/v1/stock/candle?symbol=".concat(
+  //   props.symbol,
+  //   "&resolution=D&from=",
+  //   lastYear,
+  //   "&to=",
+  //   today,
+  //   "&token=c94i99aad3if4j50rvn0"
+  // );
 
+  const url =
+    "https://finnhub.io/api/v1/stock/candle?symbol=TSLA&resolution=D&from=".concat(
+      lastYear,
+      "&to=",
+      today,
+      "&token=c94i99aad3if4j50rvn0"
+    );
+  console.log(url);
   const fetchData = async () => {
     await fetch(url)
       .then(function (response) {

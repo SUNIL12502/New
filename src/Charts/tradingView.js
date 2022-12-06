@@ -6,11 +6,11 @@ import TradingViewWidget, { Themes } from "react-tradingview-widget";
 } from "react-tradingview-technical-analysis"; */
 import {
   MarketOverview,
-  TechnicalAnalysis
+  TechnicalAnalysis,
 } from "react-ts-tradingview-widgets";
 
 export default function TradingWidget(props) {
-  const symbol ="NASDAQ:".concat(props.symbol);
+  const symbol = "NASDAQ:".concat(props.symbol);
   return (
     <div className="App">
       <div style={{ height: 500 }}>
@@ -28,4 +28,3 @@ export default function TradingWidget(props) {
     </div>
   );
 }
-

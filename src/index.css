@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,600;1,700&display=swap');
-
+/* 
 html,
 body,
 #root,
-.app,
+.app, */
 
 .header{
   text-align: center;
@@ -15,10 +15,6 @@ body,
 }
 .context{
   width:100%
-}
-.abc{
-  position: fixed;
-  z-index: 1;
 }
 
 .app{

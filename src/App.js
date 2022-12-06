@@ -9,7 +9,8 @@ import Register from "./scenes/register/Register";
 import WatchList from "./scenes/dashboard/watchlist";
 import News from "./data/News/News"
 import Details from "./scenes/dashboard/details";
-import LandingPage from "./global/LandingPage";
+import LandingPage from "./global/LandingPage"
+
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -43,7 +44,19 @@ function App() {
             } />
             {/* <Route path="/dashboard" element = {<Dashboard />} /> */}
             <Route path="/register" element = {<Register />} />
-            <Route path="/watchlist" element = {<WatchList />} />
+            <Route path="/watchlist" element = {
+               <>
+               <div className="app">
+               <HamburgerMenu />
+               <main className="context">
+               <div><Topbar display="flex"/></div>
+               <WatchList />
+   
+               </main>
+   
+               </div>
+               </>
+            } />
             <Route path="/details" element = {<Details />} />
 
 
