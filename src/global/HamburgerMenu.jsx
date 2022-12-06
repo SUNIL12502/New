@@ -21,7 +21,8 @@ import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutl
 import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
-import { useAuthContext } from "../hooks/useAuthContext.jsx";
+import { useNavigate } from "react-router-dom";
+
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -42,10 +43,11 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
   );
 };
 
-const HamburgerMenu = () => {
-  const theme = useTheme();
-  const { user } = useAuthContext();
-  // console.log("in ham"+user.firstName);
+
+const HamburgerMenu = ()  => {
+    const theme = useTheme();
+    const { user } = useAuthContext();
+    // console.log("in ham"+user.firstName);
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(true);
   const [selected, setSelected] = useState("Dashboard"); //Represents the tab which is currently selected(Change Later)
@@ -143,6 +145,7 @@ const HamburgerMenu = () => {
             <Item
               title="Watchlist"
               to="/watchlist"
+              onClick={WatchList()}
               icon={<AccountBalanceSharpIcon />}
               selected={selected}
               setSelected={setSelected}
