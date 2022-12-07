@@ -24,6 +24,7 @@ import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
 // import { useNavigate } from "react-router-dom";
+import Divider from '@mui/material/Divider';
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -61,12 +62,12 @@ const HamburgerMenu = () => {
         "& .icon-wrapper": {
           backgroundColor: "transparent !important",
         },
-        "& .pro-inner-item": {
-          padding: "5px 35px 5px 20px !important",
-        },
-        "& .inner-item:hover": {
-          color: "#868dfb !important",
-        },
+        // "& .pro-inner-item": {
+        //   padding: "5px 35px 5px 20px !important",
+        // },
+        // "& .inner-item:hover": {
+        //   color: "#868dfb !important",
+        // },
         "& .menu-item.active": {
           color: "#FFFFFF !important",
         },
@@ -90,12 +91,13 @@ const HamburgerMenu = () => {
                 alignItems="center"
                 ml="15px"
               >
-                <Typography variant="h3" color={colors.grey[0]}>
+                <Typography variant="h3" color={colors.grey[300]}>
                   Menu
                 </Typography>
                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
                   <MenuOutlinedIcon />
                 </IconButton>
+                
               </Box>
             )}
           </MenuItem>
@@ -107,7 +109,7 @@ const HamburgerMenu = () => {
                   alt="profile-user"
                   width="100px"
                   height="100px"
-                  src={"../../images/moin.jpeg"}
+                  src={"https://cdn-icons-png.flaticon.com/512/3135/3135715.png"}
                   style={{ cursor: "pointer", borderRadius: "50%" }}
                 />
               </Box>
@@ -128,16 +130,23 @@ const HamburgerMenu = () => {
           )}
 
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
+          <Divider/>
             <MenuItem
               title="Dashboard"
               routerLink={<Link to="/home"></Link>}
-              icon={<HomeOutlinedIcon />}
+              icon={<HomeOutlinedIcon style={{ color: colors.grey[300] }} />}
               selected={selected}
+              // color={colors.grey[300]}
               setSelected={setSelected}
             >
+            <Typography
+              color={colors.grey[300]}
+            >
               Stock Listings
+            </Typography>
+            
             </MenuItem>
-
+            <Divider/>
             <Typography
               variant="h6"
               color={colors.grey[300]}
@@ -148,27 +157,43 @@ const HamburgerMenu = () => {
             <MenuItem
               title="Watchlist"
               routerLink={<Link to="/watchlist"></Link>}
-              icon={<AccountBalanceSharpIcon />}
+              icon={<AccountBalanceSharpIcon style={{ color: colors.grey[300] }} />}
               selected={selected}
               setSelected={setSelected}
             >
+            <Typography
+              color={colors.grey[300]}
+            >
               Watchlist
+            </Typography>
+              
             </MenuItem>
-            <Item
+            <MenuItem
               title="News"
               routerLink={<Link to="/news"></Link>}
-              icon={<ContactsOutlinedIcon />}
+              icon={<ContactsOutlinedIcon style={{ color: colors.grey[300] }}/>}
               selected={selected}
               setSelected={setSelected}
-            />
-            <Item
-              title="Invoices Balances"
-              to="/invoices"
-              icon={<ReceiptOutlinedIcon />}
+            >
+            <Typography
+              color={colors.grey[300]}
+            >
+              News
+            </Typography>  
+            </MenuItem>
+            <MenuItem
+              title="IPO"
+              routerLink={<Link to="/ipo"></Link>}
+              icon={<ReceiptOutlinedIcon style={{ color: colors.grey[300] }}/>}
               selected={selected}
               setSelected={setSelected}
-            />
-
+            >
+            <Typography
+              color={colors.grey[300]}
+            >
+              IPO
+            </Typography>
+            </MenuItem>  
             <Typography
               variant="h6"
               color={colors.grey[300]}
