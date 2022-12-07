@@ -16,6 +16,8 @@ import LandingPage from "./global/LandingPage";
 import Newz from "./scenes/dashboard/news";
 import { useState } from "react";
 
+import IPO from "./scenes/dashboard/ipo";
+
 function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
@@ -94,6 +96,23 @@ function App() {
                           <Topbar display="flex" />
                         </div>
                         <Newz />
+                      </main>
+                    </div>
+                  </>
+                }
+              />
+
+              <Route
+                path="/ipo"
+                element={
+                  <>
+                    <div className="app">
+                      <HamburgerMenu />
+                      <main className="context">
+                        <div>
+                          <Topbar display="flex" />
+                        </div>
+                        <IPO />
                       </main>
                     </div>
                   </>
