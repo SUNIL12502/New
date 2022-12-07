@@ -70,6 +70,7 @@ function App() {
               <Route path="/details" element={<Details />} />
               <Route path="/buyStock" element={<BuyStock />} />
               <Route path="/sellStock" element={<SellStock />} />
+              <Route path="/login" element={<Login />} />
 
               {/* <Route path="/watchlist" element = {<Watchlist />} /> */}
             </Routes>
