@@ -53,10 +53,10 @@ const HamburgerMenu = ()  => {
     return (
         <Box
             sx={{
-                "& .pro-sidebar-inner": {
-                    background: `${colors.primary[500]} !important`, 
+                "& .sidebar-inner": {
+                    background: `${colors.primary[700]} !important`, 
                 },
-                "& .pro-icon-wrapper": {
+                "& .icon-wrapper": {
                     backgroundColor: "transparent !important",
                   },
                   "& .pro-inner-item": {

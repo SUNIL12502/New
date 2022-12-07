@@ -1,124 +1,12 @@
-// const LandingPage = ()  => {
-//     return (
-//     <div>
-        
-//     </div>)
-// }
-
-// export default LandingPage;
-
-// import * as React from 'react';
-// import AppBar from '@mui/material/AppBar';
-// import Button from '@mui/material/Button';
-// import CameraIcon from '@mui/icons-material/PhotoCamera';
-// import Card from '@mui/material/Card';
-// import CardActions from '@mui/material/CardActions';
-// import CardContent from '@mui/material/CardContent';
-// import CardMedia from '@mui/material/CardMedia';
-// import CssBaseline from '@mui/material/CssBaseline';
-// import Grid from '@mui/material/Grid';
-// import Stack from '@mui/material/Stack';
-// import Box from '@mui/material/Box';
-// import Toolbar from '@mui/material/Toolbar';
-// import Typography from '@mui/material/Typography';
-// import Container from '@mui/material/Container';
-// import Link from '@mui/material/Link';
-// import { createTheme, ThemeProvider } from '@mui/material/styles';
-
-// function Copyright() {
-//   return (
-//     <Typography variant="body2" color="text.secondary" align="center">
-//       {'Copyright © '}
-//       <Link color="inherit" href="https://mui.com/">
-//         Your Website
-//       </Link>{' '}
-//       {new Date().getFullYear()}
-//       {'.'}
-//     </Typography>
-//   );
-// }
-
-// // const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-
-// const theme = createTheme();
-
-// export default function LandingPage() {
-//   return (
-//     <ThemeProvider theme={theme}>
-//       <CssBaseline />
-//       <AppBar position="relative">
-//         <Toolbar>
-//           <CameraIcon sx={{ mr: 3 }} />
-//           <Typography variant="h6" color="inherit" noWrap>
-//             Stock Portfolio Manager
-//           </Typography>
-//         </Toolbar>
-//       </AppBar>
-//       <main>
-//         {/* Hero unit */}
-//         <Box
-//           sx={{
-//             bgcolor: 'background.paper',
-//             pt: 8,
-//             pb: 6,
-//           }}
-//         >
-//           <Container maxWidth="sm">
-//             <Typography
-//               component="h1"
-//               variant="h2"
-//               align="center"
-//               color="text.primary"
-//               gutterBottom
-//             >
-//               Album layout
-//             </Typography>
-//             <Typography variant="h5" align="center" color="text.secondary" paragraph>
-//               Something short and leading about the collection below—its contents,
-//               the creator, etc. Make it short and sweet, but not too short so folks
-//               don&apos;t simply skip over it entirely.
-//             </Typography>
-//             <Stack
-//               sx={{ pt: 4 }}
-//               direction="row"
-//               spacing={2}
-//               justifyContent="center"
-//             >
-//               <Button variant="contained">Main call to action</Button>
-//               <Button variant="outlined">Secondary action</Button>
-//             </Stack>
-//           </Container>
-//         </Box>
-        
-//       </main>
-//       {/* Footer */}
-//       <Box sx={{ bgcolor: 'background.paper', p: 6 }} component="footer">
-//         <Typography variant="h6" align="center" gutterBottom>
-//           Footer
-//         </Typography>
-//         <Typography
-//           variant="subtitle1"
-//           align="center"
-//           color="text.secondary"
-//           component="p"
-//         >
-//           Something here to give the footer a purpose!
-//         </Typography>
-//         <Copyright />
-//       </Box>
-//       {/* End footer */}
-//     </ThemeProvider>
-//   );
-// }
-
-
 import * as React from 'react';
+import './LandingPage.scss';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { useNavigate } from "react-router-dom";
+import Grid from '@mui/material/Grid'; // Grid version 1
 // import {
 //   Drawer,
 //   List,
@@ -126,7 +14,9 @@ import { useNavigate } from "react-router-dom";
 //   ListItemText,
 // } from "@material-ui/core";
 import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
+import EqualizerIcon from '@mui/icons-material/Equalizer';
+import { height } from '@mui/system';
+
 // import { width } from '@mui/system';
 // import { useHistory } from "react-router-dom";
 // const history = useHistory();
@@ -159,31 +49,84 @@ export default function ButtonAppBar() {
 
   }
 
+
+
   return (
-    <Box sx={{width:"100vw", flexGrow: 1}}>
+    <Box sx={{width:"100%", flexGrow: 1,backgroundColor:"#141b2d"}}>
       <AppBar position="static">
         <Toolbar>
           <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              sx={{ mr: 2 }}
+              // justifyContent="center"
+            >
+              <EqualizerIcon/>
           </IconButton>
-          <Typography variant="h6" component="div">
-            Stock Portfolio Mangement
+
+          <Typography width="85%" variant="h6" component="div" >
+            <a href='/' style={{color: 'inherit', textDecoration: 'none'}}>Stock Portfolio Mangement</a>
           </Typography>
-          {/* <List color="inherit" sx={{ ml: "75vw" }} to="/login">Login</List> */}
-          <div>
-            <Button color="inherit" sx={{ ml: "75vw" }} onClick={loginHandler}>Login</Button>
+        
+          <Typography sx={{ justifyContent:"space-between", display:"flex"}}>
+            <Button color="inherit" onClick={loginHandler}>Login</Button>
             <Button color="inherit" onClick={registerHandler}>Signup</Button>
-          </div>
-          
+          </Typography>
           
         </Toolbar>
       </AppBar>
+      
+      <Typography sx={{ marginTop: "1%", paddingTop:"8%", paddingBottom:"19%",marginLeft:"10%", fontSize:70, color:"white"}} 
+                      className="stocksTransform" display="flex" component="div" variant='h2'>
+        <div>
+          <p>Invest in
+          <span>US Stocks</span> 
+          <span>IPO</span> 
+          <span>Future</span> 
+          <span>Indian Stocks</span> 
+          <span>Options</span> 
+          </p> 
+        </div> 
+        <div className="Tile1">
+          <a href="https://itunes.apple.com/us/app/groww-mutual-funds-app/id1404871703?ls=1&amp;mt=8" class="" 
+            target="_blank" rel="noopener noreferrer nofollow">
+            <div class="lazyload-wrapper ">
+              <img class="tradeImage1" src="https://media.istockphoto.com/id/943292690/photo/financial-and-technical-data-analysis-graph-showing-stock-market-trends.jpg?s=612x612&w=0&k=20&c=pPx6ScJIqxo60fAExwJRIzYNQ_Jd-l-L78yUIJEzfAY=" width="250" height="180" alt="ios" loading="lazy"/>
+            </div>
+          </a>
+      </div>
+      <div className="Tile2">
+          <a href="https://itunes.apple.com/us/app/groww-mutual-funds-app/id1404871703?ls=1&amp;mt=8" class="" 
+            target="_blank" rel="noopener noreferrer nofollow">
+            <div class="lazyload-wrapper ">
+              <img class="tradeImage1" src="https://media.istockphoto.com/photos/close-up-image-of-a-stock-market-graph-picture-id1213574690?b=1&k=20&m=1213574690&s=612x612&w=0&h=N2lNvavpoTFOjBHIVbKd2BmFj9Q3wjqEpxT5AASB50M=" width="250" height="180" alt="ios" loading="lazy"/>
+            </div>
+          </a>
+      </div> 
+      <div className="Tile3">
+          <a href="https://itunes.apple.com/us/app/groww-mutual-funds-app/id1404871703?ls=1&amp;mt=8" class="" 
+            target="_blank" rel="noopener noreferrer nofollow">
+            <div class="lazyload-wrapper ">
+              <img class="tradeImage1" src="https://wallpaperaccess.com/full/1393720.jpg" width="250" height="180" alt="ios" loading="lazy"/>
+            </div>
+          </a>
+      </div> 
+      <div className="Tile4">
+          <a href="https://itunes.apple.com/us/app/groww-mutual-funds-app/id1404871703?ls=1&amp;mt=8" class="" 
+            target="_blank" rel="noopener noreferrer nofollow">
+            <div class="lazyload-wrapper ">
+              <img class="tradeImage1" src="https://the-tech-trend.com/wp-content/uploads/2021/02/How-to-read-Candlestick-Trading-Charts-A-Complete-Guide-for-Beginners.jpg" width="250" height="180" alt="ios" loading="lazy"/>
+            </div>
+          </a>
+      </div>   
+          
+      </Typography>
+
+      
+      
+
     </Box>
   );
 }
