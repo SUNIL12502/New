@@ -22,9 +22,9 @@ export default function TradingWidget(props) {
         />
       </div>
 
-      <TechnicalAnalysis symbol={symbol} dark locale="en" />
+      {/* <TechnicalAnalysis symbol={symbol} dark locale="en" />
 
-      <MarketOverview locale="en" />
+      <MarketOverview locale="en" /> */}
     </div>
   );
 }
