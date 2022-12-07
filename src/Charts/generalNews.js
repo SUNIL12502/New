@@ -10,7 +10,7 @@ export default function News() {
 
   const fetchData = () => {
     let url =
-      "https://finnhub.io/api/v1/news?category=general&token=c94i99aad3if4j50rvn0";
+      "https://finnhub.io/api/v1/news?category=general&token=ce80b8aad3i4pjr4v2ggce80b8aad3i4pjr4v2h0";
 
     axios.get(url).then((res) => {
       const pData = res.data;
@@ -22,15 +22,15 @@ export default function News() {
     fetchData();
   }, []);
   let final1 = [];
-  for (let i = 0; i < news.length && i < 10; i++) {
+  for (let i = 0; i < news.length && i < 21; i++) {
     final1.push(
       <Grid item xs={12} md={6} lg={4} key={i}>
         <Paper
           sx={{
-            p: 2,
+            p: 4,
             display: "flex",
-            height: 450,
-            width: 300,
+            height: 400,
+            //width: 300,
             flexDirection: "column",
           }}
         >
@@ -44,6 +44,7 @@ export default function News() {
     <Grid
       sx={{
         display: "flex",
+        flexWrap: "wrap",
         height: 450,
       }}
     >

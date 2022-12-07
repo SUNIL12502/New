@@ -12,7 +12,7 @@ export default function News(props) {
     let url = "";
     if (props.basic === "news?category=general") {
       url =
-        "https://finnhub.io/api/v1/news?category=general&token=c94i99aad3if4j50rvn0";
+        "https://finnhub.io/api/v1/news?category=general&token=ce80b8aad3i4pjr4v2ggce80b8aad3i4pjr4v2h0";
     } else {
       const today = new Date();
       const pastDate = new Date();
@@ -82,14 +82,14 @@ export default function News(props) {
     );
   }
 
-  return (
-    <Grid
-      sx={{
-        display: "flex",
-      }}
-    >
-      {final1}
-    </Grid>
-  );
+  <Grid
+    sx={{
+      display: "flex",
+      flexWrap: "wrap",
+      height: 450,
+    }}
+  >
+    {final1}
+  </Grid>;
   // return <>{final1}</>;
 }

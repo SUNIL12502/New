@@ -23,8 +23,7 @@ import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
-import { useNavigate } from "react-router-dom";
-
+// import { useNavigate } from "react-router-dom";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -45,46 +44,45 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
   );
 };
 
-
-const HamburgerMenu = ()  => {
-    const theme = useTheme();
-    const { user } = useAuthContext();
-    // console.log("in ham"+user.firstName);
+const HamburgerMenu = () => {
+  const theme = useTheme();
+  const { user } = useAuthContext();
+  // console.log("in ham"+user.firstName);
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(true);
-  const [selected, setSelected] = useState("Dashboard");//Represents the tab which is currently selected(Change Later)
-    return (
-        <Box
-            sx={{
-                "& .sidebar-inner": {
-                    background: `${colors.primary[700]}`, 
-                },
-                "& .icon-wrapper": {
-                    backgroundColor: "transparent !important",
-                  },
-                  "& .pro-inner-item": {
-                    padding: "5px 35px 5px 20px !important",
-                  },
-                  "& .inner-item:hover": {
-                    color: "#868dfb !important",
-                  },
-                  "& .menu-item.active": {
-                    color: "#FFFFFF !important",
-                  },
+  const [selected, setSelected] = useState("Dashboard"); //Represents the tab which is currently selected(Change Later)
+  return (
+    <Box
+      sx={{
+        "& .sidebar-inner": {
+          background: `${colors.primary[700]}`,
+        },
+        "& .icon-wrapper": {
+          backgroundColor: "transparent !important",
+        },
+        "& .pro-inner-item": {
+          padding: "5px 35px 5px 20px !important",
+        },
+        "& .inner-item:hover": {
+          color: "#868dfb !important",
+        },
+        "& .menu-item.active": {
+          color: "#FFFFFF !important",
+        },
+      }}
+    >
+      <Sidebar collapsed={isCollapsed}>
+        <Menu iconshape="square">
+          {/* Logo amd menu item  */}
+          <MenuItem
+            onClick={() => setIsCollapsed(!isCollapsed)}
+            icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
+            style={{
+              margin: "10px 0 20px 0",
+              color: colors.grey[100],
             }}
-         >
-            <Sidebar collapsed = {isCollapsed}>
-                <Menu iconshape = "square">
-                    {/* Logo amd menu item  */}
-                    <MenuItem
-                    onClick={() => setIsCollapsed(!isCollapsed)}
-                    icon= {isCollapsed ? <MenuOutlinedIcon /> : undefined}
-                    style= {{
-                        margin: "10px 0 20px 0",
-                        color: colors.grey[100],
-                    }}
-                    >
-                      {!isCollapsed && (
+          >
+            {!isCollapsed && (
               <Box
                 display="flex"
                 justifyContent="space-between"
@@ -128,15 +126,16 @@ const HamburgerMenu = ()  => {
             </Box>
           )}
 
-
-<Box paddingLeft={isCollapsed ? undefined : "10%"}>
+          <Box paddingLeft={isCollapsed ? undefined : "10%"}>
             <MenuItem
               title="Dashboard"
-              routerLink={<Link to="/home" ></Link>}
+              routerLink={<Link to="/home"></Link>}
               icon={<HomeOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            >Stock Listings</MenuItem>
+            >
+              Stock Listings
+            </MenuItem>
 
             <Typography
               variant="h6"
@@ -147,14 +146,16 @@ const HamburgerMenu = ()  => {
             </Typography>
             <MenuItem
               title="Watchlist"
-              routerLink={<Link to="/watchlist" ></Link>}
+              routerLink={<Link to="/watchlist"></Link>}
               icon={<AccountBalanceSharpIcon />}
               selected={selected}
               setSelected={setSelected}
-            >Watchlist</MenuItem>
+            >
+              Watchlist
+            </MenuItem>
             <Item
               title="News"
-              routerLink={<Link to="/news" ></Link>}
+              routerLink={<Link to="/news"></Link>}
               icon={<ContactsOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}

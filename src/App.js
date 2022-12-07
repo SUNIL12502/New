@@ -12,15 +12,13 @@ import Details from "./scenes/dashboard/details";
 import BuyStock from "./scenes/dashboard/buyStock";
 import SellStock from "./scenes/dashboard/sellStock";
 import LandingPage from "./global/LandingPage";
-import LandingPage from "./global/LandingPage"
+// import LandingPage from "./global/LandingPage"
+import Newz from "./scenes/dashboard/news";
 import { useState } from "react";
-
 
 function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
-  
-
 
   return (
     <ColorModeContext.Provider value={colorMode}>
@@ -67,10 +65,46 @@ function App() {
                   </>
                 }
               />
-              <Route path="/details" element={<Details />} />
+
+              <Route
+                path="/details"
+                element={
+                  <>
+                    <div className="app">
+                      <HamburgerMenu />
+                      <main className="context">
+                        <div>
+                          <Topbar display="flex" />
+                        </div>
+                        <Details />
+                      </main>
+                    </div>
+                  </>
+                }
+              />
+
+              <Route
+                path="/news"
+                element={
+                  <>
+                    <div className="app">
+                      <HamburgerMenu />
+                      <main className="context">
+                        <div>
+                          <Topbar display="flex" />
+                        </div>
+                        <Newz />
+                      </main>
+                    </div>
+                  </>
+                }
+              />
+
+              {/* <Route path="/details" element={<Details />} /> */}
               <Route path="/buyStock" element={<BuyStock />} />
               <Route path="/sellStock" element={<SellStock />} />
               <Route path="/login" element={<Login />} />
+              {/* <Route path="/news" element={<Newz />} /> */}
 
               {/* <Route path="/watchlist" element = {<Watchlist />} /> */}
             </Routes>
