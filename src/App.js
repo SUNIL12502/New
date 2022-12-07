@@ -9,6 +9,8 @@ import Register from "./scenes/register/Register";
 import WatchList from "./scenes/dashboard/watchlist";
 import News from "./data/News/News"
 import Details from "./scenes/dashboard/details";
+import BuyStock from "./scenes/dashboard/buyStock";
+import SellStock from "./scenes/dashboard/sellStock";
 import LandingPage from "./global/LandingPage"
 
 
@@ -58,7 +60,8 @@ function App() {
                </>
             } />
             <Route path="/details" element = {<Details />} />
-
+            <Route path="/buyStock" element = {<BuyStock />} />
+            <Route path="/sellStock" element = {<SellStock />} />
 
             <Route path="/login" element = {<Login />} />
             {/* <Route path="/watchlist" element = {<Watchlist />} /> */}

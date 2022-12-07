@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -11,25 +11,35 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useAuth } from "../contexts/AuthContext";
+
+
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+// import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+
+// import { useAuth } from "../contexts/AuthContext";
 import { useNavigate } from 'react-router-dom';
-import { doc,  updateDoc, arrayUnion, Timestamp } from "firebase/firestore";
+// import { doc,  updateDoc, arrayUnion, Timestamp } from "firebase/firestore";
 import { useLocation } from 'react-router-dom';
-import { auth, db } from '../Firebase';
-import Copyright from '../components/Copyright';
+// import { auth, db } from '../Firebase';
+// import Copyright from '../components/Copyright';
+import { useTransaction } from '../../hooks/transaction';
 
 
 const theme = createTheme();
 
-export default function stockTransaction() {
-    const nameRef = useRef();
-    const quantityRef = useRef();
-    const valueRef = useRef();
+export default function SellStock() {
+    // const nameRef = useRef();
+    // const quantityRef = useRef();
+    // const valueRef = useRef();
     // const { currentUser, signup } = useAuth();
     
     const [loading, setLoading] = useState(false);
     const history = useNavigate();
     const location = useLocation();
+
+    const {transaction, error, isLoading} = useTransaction();
 
     const user = JSON.parse(localStorage.getItem("user"));
     console.log(user);
@@ -38,21 +48,25 @@ export default function stockTransaction() {
         e.preventDefault()
         
         const data = new FormData(e.currentTarget);
-        console.log(currentUser.email)
+        // console.log(currentUser.email)
         
-            const washingtonRef = doc(db, "Stocks", currentUser.email);
+            // const washingtonRef = doc(db, "Stocks", currentUser.email);
             const values = {
-                dates: Timestamp.fromDate(new Date()),
-                value: data.get('value'),
-                quantity: data.get('quantity'),
-                name: location.state.name,
-                symbol: location.state.Symbol
+                userId: user.id,
+                symbol: location.state.symbol,
+                price: location.state.today,
+                shares: data.get('quantity'),
+                tradeType: "SELL"
+                // dates: Timestamp.fromDate(new Date()),
+                // value: data.get('value'),
+                // quantity: data.get('quantity'),
+                // name: location.state.name,
+                // symbol: location.state.Symbol
             }
             //console.log(values);
-            await updateDoc(washingtonRef, {
-                Add: arrayUnion(values)
-             });
-               history("/watchlist")
+            const transactionStatus = await transaction(user,values);
+            console.log(transactionStatus)
+            // history("/watchlist");
 
     }
 
@@ -89,7 +103,7 @@ export default function stockTransaction() {
                             <LockOutlinedIcon />
                         </Avatar>
                         <Typography component="h1" variant="h5">
-                            Add Stock
+                            SELL STOCK
                         </Typography>
                         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
                             <TextField
@@ -101,19 +115,8 @@ export default function stockTransaction() {
                                 name="name"
                                 value={location.state.name}
                                 autoComplete="name"
-                                ref={nameRef}
+                                // ref={nameRef}
                                 autoFocus
-                            />
-                            <TextField
-                                margin="normal"
-                                required
-                                fullWidth
-                                name="quantity"
-                                label="Quantity"
-                                type="number"
-                                id="quantity"
-                                ref={quantityRef}
-                                autoComplete="quantity"
                             />
                             <TextField
                                 margin="normal"
@@ -123,9 +126,35 @@ export default function stockTransaction() {
                                 label="Value"
                                 type="number"
                                 id="value"
-                                ref={valueRef}
+                                value={location.state.today}
                                 autoComplete="value"
                             />
+
+                            <TextField
+                                margin="normal"
+                                required
+                                fullWidth
+                                name="quantity"
+                                label="Quantity"
+                                type="number"
+                                id="quantity"
+                                // ref={quantityRef}
+                                autoComplete="quantity"
+                            />
+                            
+
+                            {/* <InputLabel id="type-label">Type</InputLabel>
+                            <Select
+                            labelId="type-label"
+                            id="type"
+                            name="type"
+                            // value={age}
+                            label="Age"
+                            // onChange={handleChange}
+                            >
+                            <MenuItem value={"BUY"}>BUY</MenuItem>
+                            <MenuItem value={"SELL"}>SELL</MenuItem>
+                            </Select> */}
 
                             <Button
                                 type="submit"
@@ -134,7 +163,7 @@ export default function stockTransaction() {
                                 variant="contained"
                                 sx={{ mt: 3, mb: 2 }}
                             >
-                                Add Stock
+                                SELL Stock
                             </Button>
                             <Grid container>
                                 <Grid item xs>
@@ -146,7 +175,7 @@ export default function stockTransaction() {
                                     </Link>
                                 </Grid>
                             </Grid>
-                            <Copyright sx={{ mt: 5 }} />
+                            {/* <Copyright sx={{ mt: 5 }} /> */}
                         </Box>
                     </Box>
                 </Grid>

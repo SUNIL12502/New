@@ -179,8 +179,8 @@ const Watchlist = () => {
             .forEach(
               (c) => (thisRow[c.field] = params.getValue(params.id, c.field))
             );
-          //console.log(thisRow)
-          //     history('/addStock',{state:thisRow});
+          console.log(thisRow)
+              history('/buyStock',{state:thisRow});
           return;
         };
 
@@ -209,8 +209,10 @@ const Watchlist = () => {
               (c) => (thisRow[c.field] = params.getValue(params.id, c.field))
             );
 
-          return alert(JSON.stringify(thisRow.name, null, 4));
-          return;
+          // return alert(JSON.stringify(thisRow.name, null, 4));
+          // return;
+          console.log(thisRow)
+              history('/sellStock',{state:thisRow});
         };
 
         return (
