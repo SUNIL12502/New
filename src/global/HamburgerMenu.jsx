@@ -21,7 +21,10 @@ import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutl
 import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
-import { useAuthContext } from "../hooks/useAuthContext.jsx";
+import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "../hooks/useAuthContext";
+import { useNavigate } from "react-router-dom";
+
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -42,52 +45,53 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
   );
 };
 
-const HamburgerMenu = () => {
-  const theme = useTheme();
-  const { user } = useAuthContext();
-  // console.log("in ham"+user.firstName);
+
+const HamburgerMenu = ()  => {
+    const theme = useTheme();
+    const { user } = useAuthContext();
+    // console.log("in ham"+user.firstName);
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(true);
-  const [selected, setSelected] = useState("Dashboard"); //Represents the tab which is currently selected(Change Later)
-  return (
-    <Box
-      sx={{
-        "& .pro-sidebar-inner": {
-          background: `${colors.primary[500]} !important`,
-        },
-        "& .pro-icon-wrapper": {
-          backgroundColor: "transparent !important",
-        },
-        "& .pro-inner-item": {
-          padding: "5px 35px 5px 20px !important",
-        },
-        "& .pro-inner-item:hover": {
-          color: "#868dfb !important",
-        },
-        "& .pro-menu-item.active": {
-          color: "#6870fa !important",
-        },
-      }}
-    >
-      <Sidebar collapsed={isCollapsed}>
-        <Menu iconshape="square">
-          {/* Logo amd menu item  */}
-          <MenuItem
-            onClick={() => setIsCollapsed(!isCollapsed)}
-            icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
-            style={{
-              margin: "10px 0 20px 0",
-              color: colors.grey[100],
+  const [selected, setSelected] = useState("Dashboard");//Represents the tab which is currently selected(Change Later)
+    return (
+        <Box
+            sx={{
+                "& .sidebar-inner": {
+                    background: `${colors.primary[700]}`, 
+                },
+                "& .icon-wrapper": {
+                    backgroundColor: "transparent !important",
+                  },
+                  "& .pro-inner-item": {
+                    padding: "5px 35px 5px 20px !important",
+                  },
+                  "& .inner-item:hover": {
+                    color: "#868dfb !important",
+                  },
+                  "& .menu-item.active": {
+                    color: "#FFFFFF !important",
+                  },
             }}
-          >
-            {!isCollapsed && (
+         >
+            <Sidebar collapsed = {isCollapsed}>
+                <Menu iconshape = "square">
+                    {/* Logo amd menu item  */}
+                    <MenuItem
+                    onClick={() => setIsCollapsed(!isCollapsed)}
+                    icon= {isCollapsed ? <MenuOutlinedIcon /> : undefined}
+                    style= {{
+                        margin: "10px 0 20px 0",
+                        color: colors.grey[100],
+                    }}
+                    >
+                      {!isCollapsed && (
               <Box
                 display="flex"
                 justifyContent="space-between"
                 alignItems="center"
                 ml="15px"
               >
-                <Typography variant="h3" color={colors.grey[100]}>
+                <Typography variant="h3" color={colors.grey[0]}>
                   Menu
                 </Typography>
                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
@@ -124,14 +128,15 @@ const HamburgerMenu = () => {
             </Box>
           )}
 
-          <Box paddingLeft={isCollapsed ? undefined : "10%"}>
-            <Item
+
+<Box paddingLeft={isCollapsed ? undefined : "10%"}>
+            <MenuItem
               title="Dashboard"
-              to="/"
+              routerLink={<Link to="/home" ></Link>}
               icon={<HomeOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            />
+            >Stock Listings</MenuItem>
 
             <Typography
               variant="h6"
@@ -140,16 +145,16 @@ const HamburgerMenu = () => {
             >
               Data
             </Typography>
-            <Item
+            <MenuItem
               title="Watchlist"
-              to="/watchlist"
+              routerLink={<Link to="/watchlist" ></Link>}
               icon={<AccountBalanceSharpIcon />}
               selected={selected}
               setSelected={setSelected}
-            />
+            >Watchlist</MenuItem>
             <Item
-              title="Portfolio"
-              to="/contacts"
+              title="News"
+              routerLink={<Link to="/news" ></Link>}
               icon={<ContactsOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}

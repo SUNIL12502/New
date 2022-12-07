@@ -14,7 +14,7 @@ const Header = ({ title, subtitle }) => {
         >
           {title}
         </Typography>
-        <Typography variant="h5" color={colors.greenAccent[400]} sx={{ m: "5px 5px 5px 5px" }}>
+        <Typography fontFamily={"BlinkMacSystemFont"} variant="h5" color={colors.greenAccent[400]} sx={{ m: "5px 5px 5px 5px" }}>
           {subtitle}
         </Typography>
       </Box>
