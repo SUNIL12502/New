@@ -1,21 +1,19 @@
 import { useState } from 'react';
-import { useAuthContext } from './useAuthContext.jsx';
 
-export const useLogin = () =>{
+export const useTransaction = () =>{
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(null);
-    const { dispatch } = useAuthContext();
 
-    const login = async (email, password) =>{
+    const transaction = async (user,value) =>{
         setIsLoading(true)
         setError(null)
         
 
-        const url = "http://localhost:8080/user/login/";
+        const url = `http://localhost:8080/trade/${user.id}`;
         const response = await fetch (url, {
             method: 'POST',
             headers:{'Content-Type':'application/json'},
-            body: JSON.stringify({email, password})
+            body: JSON.stringify(value)
         })
         const json = await response.json()
 
@@ -26,15 +24,11 @@ export const useLogin = () =>{
         }
         if(response.ok){
             // save the user to local browser storage
-            localStorage.setItem('user',JSON.stringify(json))
-
             // Update the auth context
-            dispatch({type:'LOGIN', payload: json});
             setIsLoading(false);
             return true;
         }
 
     }
-    return ({ login,  error, isLoading });
+    return ({ transaction,  error, isLoading });
 };
-

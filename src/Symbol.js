@@ -26,7 +26,7 @@ export const rows=[
     },
     {
      "description": "GOLDMAN SACHS PHYSICAL GOLD",
-     "symbol": "AAAU"
+     "symbol": "GS"
     },
     {
      "description": "ASIA BROADBAND INC",

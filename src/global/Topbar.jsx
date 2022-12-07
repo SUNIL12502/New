@@ -35,6 +35,7 @@ const Topbar = ()  => {
 
 
     return (
+      <div display= "fixed">
         <Box display="flex" justifyContent="space-between" alignItems="center" p={2}>
             {/* //box is just like div but it is convineint (we can write css on box directly unlike div) */}
           {/* SEARCH BAR */}
@@ -88,6 +89,7 @@ const Topbar = ()  => {
 
           </Box>
         </Box>
+        </div>
       )
 }
 

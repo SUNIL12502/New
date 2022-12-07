@@ -12,12 +12,18 @@ const Register = ()  => {
 
     const handleSubmit = async (e) =>{
         e.preventDefault()
-        await signup(firstName, lastName, email, password);
+        const isLoggedIn = await signup(firstName, lastName, email, password);
         // setFirstName('');
         // setLastName('');
         // setEmail('');
         // setPassword('');
-        navigate("../home");
+        // if(!error){
+        //     navigate("../home");
+        // }
+        // else{
+        isLoggedIn?navigate("../home"):navigate("../login")    
+        // }
+        
     }
     return (
         <form className="signup" onSubmit={handleSubmit}>
