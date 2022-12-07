@@ -1,27 +1,29 @@
-import * as React from 'react';
-import {useEffect} from 'react'
-import Typography from '@mui/material/Typography';
-import Title from '../scenes/dashboard/Title';
-import axios from 'axios';
-
+import * as React from "react";
+import { useEffect } from "react";
+import Typography from "@mui/material/Typography";
+import Title from "../scenes/dashboard/Title";
+import axios from "axios";
 
 export default function Quotes(props) {
-        const [quotesData,setQuotesData] = React.useState({}) ;
-        const fetchData = () => {
-          const url="https://finnhub.io/api/v1/quote?symbol=".concat(props.symbol,"&token=c94i99aad3if4j50rvn0")
-            axios.get(url).then(res => {
-            const pData = res.data;
-            setQuotesData(pData);
-            
-          }).catch(err=>{
-            console.log(err);
-          })
-        }
-        useEffect(() => {
-          fetchData()
-          }, [])
-          
-      
+  const [quotesData, setQuotesData] = React.useState({});
+  const fetchData = () => {
+    const url = "https://finnhub.io/api/v1/quote?symbol=".concat(
+      props.symbol,
+      "&token=ce80b8aad3i4pjr4v2ggce80b8aad3i4pjr4v2h0"
+    );
+    axios
+      .get(url)
+      .then((res) => {
+        const pData = res.data;
+        setQuotesData(pData);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <React.Fragment>
@@ -41,7 +43,6 @@ export default function Quotes(props) {
       <Typography color="text.secondary" sx={{ flex: 1 }}>
         High {quotesData["h"]}
       </Typography>
-      
     </React.Fragment>
   );
 }

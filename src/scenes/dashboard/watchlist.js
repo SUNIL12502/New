@@ -47,7 +47,7 @@ const Watchlist = () => {
       let newData = [];
       const url = "https://finnhub.io/api/v1/quote?symbol=".concat(
         abc[key].symbol,
-        "&token=c94i99aad3if4j50rvn0"
+        "&token=ce80b8aad3i4pjr4v2ggce80b8aad3i4pjr4v2h0"
       );
       await axios
         .get(url)
@@ -187,8 +187,8 @@ const Watchlist = () => {
             .forEach(
               (c) => (thisRow[c.field] = params.getValue(params.id, c.field))
             );
-          console.log(thisRow)
-              history('/buyStock',{state:thisRow});
+          console.log(thisRow);
+          history("/buyStock", { state: thisRow });
           return;
         };
 
@@ -219,8 +219,8 @@ const Watchlist = () => {
 
           // return alert(JSON.stringify(thisRow.name, null, 4));
           // return;
-          console.log(thisRow)
-              history('/sellStock',{state:thisRow});
+          console.log(thisRow);
+          history("/sellStock", { state: thisRow });
         };
 
         return (
@@ -303,10 +303,7 @@ const Watchlist = () => {
       {/* {isLoading && <h1>Loading Data...</h1>} */}
       <Box m="20px">
         {/* <Header title="Watchlist" /> */}
-        <Header
-        title="Watchlist"
-        subtitle="Watchlist"
-      />
+        <Header title="Watchlist" subtitle="Watchlist" />
         <Box
           m="40px 0 0 0"
           height="75vh"
