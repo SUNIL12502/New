@@ -51,39 +51,7 @@ const HamburgerMenu = () => {
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(true);
   const [selected, setSelected] = useState("Dashboard");//Represents the tab which is currently selected(Change Later)
-    return (
-        <Box
-            sx={{
-                "& .sidebar-inner": {
-                    background: `${colors.primary[700]} !important`, 
-                },
-                "& .icon-wrapper": {
-                    backgroundColor: "transparent !important",
-                  },
-                  "& .pro-inner-item": {
-                    padding: "5px 35px 5px 20px !important",
-                  },
-                  "& .pro-inner-item:hover": {
-                    color: "#868dfb !important",
-                  },
-                  "& .pro-menu-item.active": {
-                    color: "#6870fa !important",
-                  },
-            }}
-         >
-            <Sidebar collapsed = {isCollapsed}>
-                <Menu iconshape = "square">
-                    {/* Logo amd menu item  */}
-                    <MenuItem
-                    onClick={() => setIsCollapsed(!isCollapsed)}
-                    icon= {isCollapsed ? <MenuOutlinedIcon /> : undefined}
-                    style= {{
-                        margin: "10px 0 20px 0",
-                        color: colors.grey[100],
-                    }}
-                    >
-                      {!isCollapsed && (
-  const [selected, setSelected] = useState("Dashboard"); //Represents the tab which is currently selected(Change Later)
+    
   return (
     <Box
       sx={{
