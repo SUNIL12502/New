@@ -23,12 +23,10 @@ const DashboardContent = () => {
     history("/");
   }
 
-  console.log(location.state.symbol);
-
-  // function AdvanceChart(props) {
-  //   console.log("CALLING LIGHT WEIGHT CHART", props);
-  //   history("/lightWeight", { state: props });
-  // }
+  function AdvanceChart(props) {
+    console.log("CALLING LIGHT WEIGHT CHART", props);
+    history("/lightWeight", { state: props });
+  }
   return (
     <>
       {/* Chart */}
@@ -45,18 +43,7 @@ const DashboardContent = () => {
         </Paper>
       </Grid> */}
       {/* Recent Deposits */}
-      <Grid item xs={12} md={4} lg={3}>
-        <Paper
-          sx={{
-            p: 2,
-            display: "flex",
-            flexDirection: "column",
-            height: 240,
-          }}
-        >
-          <Quotes symbol={location.state.symbol} />
-        </Paper>
-      </Grid>
+
       {/* Recent Orders */}
 
       {/* Recent Orders */}
@@ -74,6 +61,21 @@ const DashboardContent = () => {
           <Orders symbol={location.state.symbol} />
         </Paper>
       </Grid>
+      <Grid item xs={12} md={4} lg={3}>
+        <Paper
+          sx={{
+            p: 2,
+            display: "flex",
+            flexDirection: "column",
+            height: 240,
+          }}
+        >
+          <Quotes symbol={location.state.symbol} />
+        </Paper>
+      </Grid>
+
+      <br></br>
+      <br></br>
       {/* Recent Orders */}
       {/* <Grid item xs={12}>
         <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
@@ -83,6 +85,8 @@ const DashboardContent = () => {
         </Paper>
       </Grid> */}
       {/* Recent Deposits */}
+      <br></br>
+      <br></br>
       <NewsLoad symbol={location.state.symbol} basic="company-news?symbol=" />
     </>
   );

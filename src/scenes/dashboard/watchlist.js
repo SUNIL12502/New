@@ -20,7 +20,7 @@ import React from "react";
 const Watchlist = () => {
   // const { user } = useAuthContext();
   const user = JSON.parse(localStorage.getItem("user"));
-  console.log(user);
+  // console.log(user);
   const history = useNavigate();
   // const [abc, setAbc] = useState([]);
   const [rows, setRows] = useState([]);
@@ -41,7 +41,7 @@ const Watchlist = () => {
       .then((response) => {
         response.map((d) => abc.push(d));
       });
-    console.log(abc);
+    // console.log(abc);
     for (var key in abc) {
       if (!abc.hasOwnProperty(key)) continue;
       let newData = [];
@@ -58,7 +58,7 @@ const Watchlist = () => {
         .catch((err) => {
           console.log(err);
         });
-      console.log(newData);
+      // console.log(newData);
 
       const ab = {
         id: abc[key]._id,
@@ -74,11 +74,19 @@ const Watchlist = () => {
         close: newData[0]["pc"],
       };
       // console.log(pData[key].name)
-      temp.push(ab);
+      let flag = false;
+      for (var k in temp) {
+        if (temp[k].symbol === abc[key].symbol) {
+          flag = true;
+        }
+      }
+      if (!flag) {
+        temp.push(ab);
+      }
     }
     console.log(temp);
     const s = new Set(temp);
-    console.log(s);
+    // console.log(s);
     setRows(Array.from(s));
     // setIsLoading(false);
   };
@@ -280,7 +288,7 @@ const Watchlist = () => {
             .forEach(
               (c) => (thisRow[c.field] = params.getValue(params.id, c.field))
             );
-          console.log(thisRow);
+          // console.log(thisRow);
           history("/details", { state: thisRow });
           return;
         };

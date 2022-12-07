@@ -7,68 +7,68 @@ import Dashboard from "./scenes/dashboard";
 import Login from "./scenes/login/Login";
 import Register from "./scenes/register/Register";
 import WatchList from "./scenes/dashboard/watchlist";
-import News from "./data/News/News"
+import News from "./data/News/News";
 import Details from "./scenes/dashboard/details";
 import BuyStock from "./scenes/dashboard/buyStock";
 import SellStock from "./scenes/dashboard/sellStock";
-import LandingPage from "./global/LandingPage"
-
+import LandingPage from "./global/LandingPage";
 
 function App() {
   const [theme, colorMode] = useMode();
-  
 
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
-        <CssBaseline/>
-      <div className="app">
-        
-        {/* <HamburgerMenu /> */}
-        <main className="context">
-          
-          {/* <Topbar className="abc">
+        <CssBaseline />
+        <div className="app">
+          {/* <HamburgerMenu /> */}
+          <main className="context">
+            {/* <Topbar className="abc">
           </Topbar> */}
-          <Routes>
-            <Route path="/" element = {<LandingPage />} />
-            <Route path="/home" element = {
-            <>
-            <div className="app">
-            <HamburgerMenu />
-            <main className="context">
-            <div><Topbar display="flex"/></div>
-            <Dashboard />
+            <Routes>
+              <Route path="/" element={<LandingPage />} />
+              <Route
+                path="/home"
+                element={
+                  <>
+                    <div className="app">
+                      <HamburgerMenu />
+                      <main className="context">
+                        <div>
+                          <Topbar display="flex" />
+                        </div>
+                        <Dashboard />
+                      </main>
+                    </div>
+                  </>
+                }
+              />
+              {/* <Route path="/dashboard" element = {<Dashboard />} /> */}
+              <Route path="/register" element={<Register />} />
+              <Route
+                path="/watchlist"
+                element={
+                  <>
+                    <div className="app">
+                      <HamburgerMenu />
+                      <main className="context">
+                        <div>
+                          <Topbar display="flex" />
+                        </div>
+                        <WatchList />
+                      </main>
+                    </div>
+                  </>
+                }
+              />
+              <Route path="/details" element={<Details />} />
+              <Route path="/buyStock" element={<BuyStock />} />
+              <Route path="/sellStock" element={<SellStock />} />
 
-            </main>
-
-            </div>
-            </>
-            } />
-            {/* <Route path="/dashboard" element = {<Dashboard />} /> */}
-            <Route path="/register" element = {<Register />} />
-            <Route path="/watchlist" element = {
-               <>
-               <div className="app">
-               <HamburgerMenu />
-               <main className="context">
-               <div><Topbar display="flex"/></div>
-               <WatchList />
-   
-               </main>
-   
-               </div>
-               </>
-            } />
-            <Route path="/details" element = {<Details />} />
-            <Route path="/buyStock" element = {<BuyStock />} />
-            <Route path="/sellStock" element = {<SellStock />} />
-
-            <Route path="/login" element = {<Login />} />
-            {/* <Route path="/watchlist" element = {<Watchlist />} /> */}
-          </Routes>
-        </main>
-
-      </div>
+              {/* <Route path="/watchlist" element = {<Watchlist />} /> */}
+            </Routes>
+          </main>
+        </div>
       </ThemeProvider>
     </ColorModeContext.Provider>
   );
