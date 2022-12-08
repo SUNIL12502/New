@@ -22,6 +22,9 @@ export const order = async (id, newOrder) => {
             changeBalance(user, user.balance-trade.shares*trade.price)
             return placedTrade
         }
+        else{
+            throw Error("Not Enough Balance");
+        }
     }
     // for trade type SELL
     else{
@@ -42,6 +45,9 @@ export const order = async (id, newOrder) => {
             const placedTrade =  trade.save();
             changeBalance(user, user.balance+trade.shares*trade.price)
             return placedTrade
+        }
+        else{
+            throw Error("Not enough shares to sell");
         }
         
     }
@@ -66,25 +72,29 @@ export const getPortfolio = async(id) => {
             if(item.tradeType === "BUY"){
                 tempObj.holdingValue += item.shares*item.price;
                 tempObj.holdingShares += item.shares;
+                tempObj.buyShares +=item.shares;
             }
             else{
-                tempObj.holdingValue -= item.shares*item.price;
+                // tempObj.holdingValue -= item.shares*item.price;
                 tempObj.holdingShares -= item.shares;
             }  
         }
         else{
             let newObj = {
                 symbol : item.symbol,
+                name: item.name,
                 holdingValue : 0,
-                holdingShares : 0
+                holdingShares : 0,
+                buyShares: 0.
             }
 
             if(item.tradeType === "BUY"){
                 newObj.holdingValue += item.shares*item.price;
                 newObj.holdingShares += item.shares;
+                newObj.buyShares += item.shares;
             }
             else{
-                newObj.holdingValue -= item.shares*item.price;
+                // newObj.holdingValue -= item.shares*item.price;
                 newObj.holdingShares -= item.shares;
             }  
 
@@ -101,11 +111,14 @@ export const getPortfolio = async(id) => {
             const itemVal = {
                 userId:id,
                 symbol : item.symbol,
-                price : item.holdingValue/item.holdingShares,
+                name: item.name,
+                price : item.holdingValue/item.buyShares,
                 shares : item.holdingShares,
+                tradeType : "BUY"
             }
             // console.log(itemVal)
-            finalPortfolio.push(itemVal);
+            const portfolioItem = new Trade(itemVal);
+            finalPortfolio.push(portfolioItem);
         }
     }
     // console.log(portfolio)

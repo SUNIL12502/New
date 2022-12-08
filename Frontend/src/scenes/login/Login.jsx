@@ -137,7 +137,13 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const {login, error, isLoading} = useLogin();
+    const [redirect, setRedirect] = useState();
     let navigate = useNavigate();
+
+    const redirectHandler = async(e) =>{
+      // setRedirect(true)
+      navigate('../login')
+    }
 
     const handleSubmit = async (e) =>{
         e.preventDefault()
@@ -145,10 +151,7 @@ const Login = () => {
 
         const isLoggedIn= await login(email,password)
        
-    //     {if({!error}){
-    //         navigate("../home")
-    // }}
-    isLoggedIn?navigate('../home'):navigate('../login')
+    isLoggedIn ?navigate('../home'):navigate('../login')
     }
   return (
     <Box sx={{display:flexbox, backgroundColor:colors.blueAccent[400]}}>
@@ -227,8 +230,9 @@ const Login = () => {
                 {error && <><Alert severity="error">{error}</Alert><Navigate to="/login" replace={true} /></>}
                 {/* {!error && <Navigate to="/home" replace={true}/>} */}
                 {/* {login && (<Navigate to="/login" replace={true} />)} */}
-                <a href="/register" variant="body2">
+                <a href="/register" onClick={redirectHandler} variant="body2">
                     {"Don't have an account? Sign In"}
+                    {/* {setRedirect(true)} */}
                 </a>
             </Box>
 

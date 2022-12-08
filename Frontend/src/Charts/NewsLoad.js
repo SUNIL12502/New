@@ -65,7 +65,7 @@ export default function News(props) {
     fetchData();
   }, []);
   let final1 = [];
-  for (let i = 0; i < news.length && i < 10; i++) {
+  for (let i = 0; i < news.length && i < 9; i++) {
     final1.push(
       <Grid item xs={12} md={6} lg={4} key={i}>
         <Paper
@@ -82,14 +82,15 @@ export default function News(props) {
     );
   }
 
-  <Grid
-    sx={{
-      display: "flex",
-      flexWrap: "wrap",
-      height: 450,
-    }}
-  >
-    {final1}
-  </Grid>;
-  // return <>{final1}</>;
+  return (
+    <Grid
+      sx={{
+        display: "flex",
+        flexWrap: "wrap",
+        height: 450,
+      }}
+    >
+      {final1}
+    </Grid>
+  );
 }

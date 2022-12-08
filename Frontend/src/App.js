@@ -17,6 +17,10 @@ import Newz from "./scenes/dashboard/news";
 import { useState } from "react";
 
 import IPO from "./scenes/dashboard/ipo";
+import Copyright from "./global/Copyright";
+import Portfolio from "./scenes/dashboard/Portfolio";
+import Orders from "./scenes/dashboard/tradeHistory.js";
+import Testimonials from "./global/Testimonials.jsx";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -46,11 +50,12 @@ function App() {
                         <Dashboard />
                       </main>
                     </div>
+                    <Copyright />
                   </>
                 }
               />
               {/* <Route path="/dashboard" element = {<Dashboard />} /> */}
-              <Route path="/register" element={<Register />} />
+              <Route path="/register" element={<><Register/><Copyright /></>} />
               <Route
                 path="/watchlist"
                 element={
@@ -118,11 +123,94 @@ function App() {
                   </>
                 }
               />
+              <Route
+                path="/buyStock"
+                element={
+                  <>
+                    <div className="app">
+                      <HamburgerMenu />
+                      <main className="context">
+                        <div>
+                          <Topbar display="flex" />
+                        </div>
+                        <BuyStock />
+                      </main>
+                    </div>
+                  </>
+                }
+              />
+              <Route
+                path="/sellStock"
+                element={
+                  <>
+                    <div className="app">
+                      <HamburgerMenu />
+                      <main className="context">
+                        <div>
+                          <Topbar display="flex" />
+                        </div>
+                        <SellStock />
+                      </main>
+                    </div>
+                  </>
+                }
+              />
+              <Route
+                path="/portfolio"
+                element={
+                  <>
+                    <div className="app">
+                      <HamburgerMenu />
+                      <main className="context">
+                        <div>
+                          <Topbar display="flex" />
+                        </div>
+                        <Portfolio />
+                      </main>
+                    </div>
+                  </>
+                }
+              />
+
+            <Route
+                path="/orders"
+                element={
+                  <>
+                    <div className="app">
+                      <HamburgerMenu />
+                      <main className="context">
+                        <div>
+                          <Topbar display="flex" />
+                        </div>
+                        <Orders />
+                      </main>
+                    </div>
+                  </>
+                }
+              />
+
+              <Route
+                path="/testimonials"
+                element={
+                  <>
+                    <div className="app">
+                      <HamburgerMenu />
+                      <main className="context">
+                        <div>
+                          <Topbar display="flex" />
+                        </div>
+                        <Testimonials />
+                      </main>
+                    </div>
+                  </>
+                }
+              />
+
+
 
               {/* <Route path="/details" element={<Details />} /> */}
-              <Route path="/buyStock" element={<BuyStock />} />
-              <Route path="/sellStock" element={<SellStock />} />
-              <Route path="/login" element={<Login />} />
+              
+              <Route path="/login" element={<><Login /> <Copyright /></>} />
               {/* <Route path="/news" element={<Newz />} /> */}
 
               {/* <Route path="/watchlist" element = {<Watchlist />} /> */}

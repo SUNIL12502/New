@@ -11,7 +11,7 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-
+import  Alert  from '@mui/material/Alert';
 
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -25,7 +25,7 @@ import { useLocation } from 'react-router-dom';
 // import { auth, db } from '../Firebase';
 // import Copyright from '../components/Copyright';
 import { useTransaction } from '../../hooks/transaction';
-
+import { useBalance} from '../../hooks/useBalance';
 
 const theme = createTheme();
 
@@ -38,6 +38,8 @@ export default function SellStock() {
     const [loading, setLoading] = useState(false);
     const history = useNavigate();
     const location = useLocation();
+    const [tradeStatus, setTradeStatus] = useState(true);
+    // const {balance, errorBal, bal} = useBalance();
 
     const {transaction, error, isLoading} = useTransaction();
 
@@ -54,6 +56,7 @@ export default function SellStock() {
             const values = {
                 userId: user.id,
                 symbol: location.state.symbol,
+                name: location.state.name,
                 price: location.state.today,
                 shares: data.get('quantity'),
                 tradeType: "SELL"
@@ -65,7 +68,15 @@ export default function SellStock() {
             }
             //console.log(values);
             const transactionStatus = await transaction(user,values);
-            console.log(transactionStatus)
+            console.log(transactionStatus);
+            if(transactionStatus){
+                setTradeStatus(true);
+                // const currbal = await balance();
+                history("/portfolio");
+            }
+            else{
+                setTradeStatus(false);
+            }
             // history("/watchlist");
 
     }
@@ -165,6 +176,7 @@ export default function SellStock() {
                             >
                                 SELL Stock
                             </Button>
+                            {(!tradeStatus)?<Alert severity="error">{error}</Alert>:<></>}
                             <Grid container>
                                 <Grid item xs>
 
