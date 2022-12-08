@@ -61,6 +61,8 @@ Showcases user with current investment, quantity and profit/loss for each stock 
 * Stock Information:
 Contains realtime stock chart and technical analysis of that stock. Used TradingView API to fetch data.
 
+## Folder Structure
+
  # Backend Directory
     .
     ├── app.js                  #  all modules imported in this file and mongoDB connection          
@@ -94,4 +96,7 @@ Contains realtime stock chart and technical analysis of that stock. Used Trading
 * Run "npm start" in the backend folder to start the backend API service.
 * Run "npm start" in the frontend folder.
 * You will be redirected to landing page of the project.
+
+# Domain Model
+![alt text](https://github.com/neu-mis-info6150-fall-2022/final-project-jams/blob/main/images/domainDesign.png)
 
