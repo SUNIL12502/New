@@ -10,7 +10,7 @@ const setSuccessResponse = (obj, response) => {
 // setErrorResponse to be called when the promise returned by the service layer functions are not successfull
 const setErrorResponse = (error, response) => {
     response.status(500);
-    response.json(error);
+    response.json({Error:error.message});
 }
 
 // post function to place trade order.

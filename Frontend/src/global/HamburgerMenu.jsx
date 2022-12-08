@@ -1,9 +1,11 @@
 import { useState } from "react";
-import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
+import { Sidebar, Menu, MenuItem, useProSidebar,collapsed } from "react-pro-sidebar";
 // import "react-pro-sidebar/dist/css/styles.css";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
 import { tokens } from "../theme";
+
+import RateReviewOutlinedIcon from '@mui/icons-material/RateReviewOutlined';
 
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined"; //1. Home icon
 import AccountBalanceSharpIcon from "@mui/icons-material/AccountBalanceSharp"; //2. my watchlist icon
@@ -25,6 +27,9 @@ import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
 // import { useNavigate } from "react-router-dom";
 import Divider from '@mui/material/Divider';
+import ReceiptLongOutlinedIcon from '@mui/icons-material/ReceiptLongOutlined';
+import NewspaperOutlinedIcon from '@mui/icons-material/NewspaperOutlined';
+import CandlestickChartOutlinedIcon from '@mui/icons-material/CandlestickChartOutlined';
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -47,41 +52,47 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
 
 const HamburgerMenu = () => {
   const theme = useTheme();
-  const { user } = useAuthContext();
-  // console.log("in ham"+user.firstName);
+  // const { user } = useAuthContext();
   const colors = tokens(theme.palette.mode);
-  const [isCollapsed, setIsCollapsed] = useState(true);
+  const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");//Represents the tab which is currently selected(Change Later)
-    
+  const { collapseSidebar } = useProSidebar();
+  const user = JSON.parse(localStorage.getItem("user"));
+  console.log(user);
   return (
     <Box
       sx={{
-        "& .sidebar-inner": {
-          background: `${colors.primary[700]}`,
-        },
-        "& .icon-wrapper": {
-          backgroundColor: "transparent !important",
-        },
+        // "& .sidebar-root": {
+        //   backgroundColor: colors.primary[700],
+        // },
+        // // "& .icon-wrapper": {
+        //   backgroundColor: colors.primary[300],
+        // },
         // "& .pro-inner-item": {
         //   padding: "5px 35px 5px 20px !important",
         // },
         // "& .inner-item:hover": {
         //   color: "#868dfb !important",
         // },
-        "& .menu-item.active": {
-          color: "#FFFFFF !important",
-        },
+        // "& .menu-item.active": {
+        //   color: "#FFFFFF !important",
+        // },
       }}
     >
-      <Sidebar collapsed={isCollapsed}>
+      <Sidebar collapsed={isCollapsed} rootStyles={{
+        // [`.${sidebarClasses.container}`]: {
+             backgroundColor:  colors.primary[1000],
+            // },
+        }}>
+        <Box isCollapsed sx={{backgroundColor:colors.background}}>
         <Menu iconshape="square">
           {/* Logo amd menu item  */}
           <MenuItem
-            onClick={() => setIsCollapsed(!isCollapsed)}
+            onClick={() =>{collapseSidebar(); setIsCollapsed(!isCollapsed)}}
             icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
             style={{
               margin: "10px 0 20px 0",
-              color: colors.grey[100],
+              color: colors.blueAccent[700],
             }}
           >
             {!isCollapsed && (
@@ -91,7 +102,7 @@ const HamburgerMenu = () => {
                 alignItems="center"
                 ml="15px"
               >
-                <Typography variant="h3" color={colors.grey[300]}>
+                <Typography variant="h3" color={colors.grey[100]}>
                   Menu
                 </Typography>
                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
@@ -104,12 +115,12 @@ const HamburgerMenu = () => {
           {/* USER */}
           {!isCollapsed && (
             <Box mb="25px">
-              <Box display="flex" justifyContent="center" alignItems="center">
+              <Box display="flex" justifyContent="center" alignItems="center"  >
                 <img
                   alt="profile-user"
                   width="100px"
                   height="100px"
-                  src={"https://cdn-icons-png.flaticon.com/512/3135/3135715.png"}
+                  src="https://thumbs.dreamstime.com/b/man-business-suit-icon-illustration-98773345.jpg"
                   style={{ cursor: "pointer", borderRadius: "50%" }}
                 />
               </Box>
@@ -120,63 +131,102 @@ const HamburgerMenu = () => {
                   fontWeight="bold"
                   sx={{ m: "10px 0 0 0" }}
                 >
-                  {user.firstNameSaved}
+                  {user.firstNameSaved?user.firstNameSaved:user.firstName}
                 </Typography>
-                <Typography variant="h5" color={colors.greenAccent[500]}>
+                <Typography variant="h5" color={colors.greenAccent[100]}>
                   Elite Investor
                 </Typography>
               </Box>
             </Box>
           )}
-
-          <Box paddingLeft={isCollapsed ? undefined : "10%"}>
-          <Divider/>
+          
+          <Box paddingLeft={isCollapsed ? undefined : "1%"}>
+          
             <MenuItem
               title="Dashboard"
               routerLink={<Link to="/home"></Link>}
-              icon={<HomeOutlinedIcon style={{ color: colors.grey[300] }} />}
+              icon={<HomeOutlinedIcon style={{ color: colors.grey[100] }} />}
               selected={selected}
-              // color={colors.grey[300]}
+              color={colors.grey[100]}
               setSelected={setSelected}
             >
             <Typography
-              color={colors.grey[300]}
+              color={colors.grey[100]}
             >
               Stock Listings
             </Typography>
             
             </MenuItem>
-            <Divider/>
+            {/* <Divider/> */}
             <Typography
               variant="h6"
-              color={colors.grey[300]}
+              color={colors.grey[100]}
               sx={{ m: "15px 0 5px 20px" }}
             >
               Data
             </Typography>
+            {/* <Divider/> */}
             <MenuItem
               title="Watchlist"
               routerLink={<Link to="/watchlist"></Link>}
-              icon={<AccountBalanceSharpIcon style={{ color: colors.grey[300] }} />}
+              icon={<AccountBalanceSharpIcon style={{ color: colors.grey[100] }} />}
               selected={selected}
               setSelected={setSelected}
             >
             <Typography
-              color={colors.grey[300]}
+              color={colors.grey[100]}
             >
               Watchlist
             </Typography>
               
             </MenuItem>
+            {/* <Divider/> */}
             <MenuItem
-              title="News"
-              routerLink={<Link to="/news"></Link>}
-              icon={<ContactsOutlinedIcon style={{ color: colors.grey[300] }}/>}
+              title="Portfolio"
+              routerLink={<Link to="/portfolio"></Link>}
+              icon={<ContactsOutlinedIcon style={{ color: colors.grey[100] }}/>}
               selected={selected}
               setSelected={setSelected}
             >
             <Typography
-              color={colors.grey[300]}
+              color={colors.grey[100]}
+            >
+              Portfolio
+            </Typography>  
+            </MenuItem>
+            {/* <Divider/> */}
+            <MenuItem
+              title="Orders"
+              routerLink={<Link to="/orders"></Link>}
+              icon={<ReceiptLongOutlinedIcon style={{ color: colors.grey[100] }}/>}
+              selected={selected}
+              setSelected={setSelected}
+            >
+            <Typography
+              color={colors.grey[100]}
+            >
+              Orders
+            </Typography>
+            </MenuItem> 
+            
+            
+            <Typography
+              variant="h6"
+              color={colors.grey[100]}
+              sx={{ m: "15px 0 5px 20px" }}
+            >
+              Pages
+            </Typography>
+
+            <MenuItem
+              title="News"
+              routerLink={<Link to="/news"></Link>}
+              icon={<NewspaperOutlinedIcon style={{ color: colors.grey[100] }}/>}
+              selected={selected}
+              setSelected={setSelected}
+            >
+            <Typography
+              color={colors.grey[100]}
             >
               News
             </Typography>  
@@ -184,82 +234,38 @@ const HamburgerMenu = () => {
             <MenuItem
               title="IPO"
               routerLink={<Link to="/ipo"></Link>}
-              icon={<ReceiptOutlinedIcon style={{ color: colors.grey[300] }}/>}
+              icon={<CandlestickChartOutlinedIcon style={{ color: colors.grey[100] }}/>}
               selected={selected}
               setSelected={setSelected}
+
             >
             <Typography
-              color={colors.grey[300]}
+              color={colors.grey[100]}
             >
               IPO
             </Typography>
             </MenuItem>  
-            <Typography
-              variant="h6"
-              color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 20px" }}
-            >
-              Pages
-            </Typography>
-            <Item
-              title="Profile Form"
-              to="/form"
-              icon={<PersonOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Calendar"
-              to="/calendar"
-              icon={<CalendarTodayOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="FAQ Page"
-              to="/faq"
-              icon={<HelpOutlineOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
 
-            <Typography
-              variant="h6"
-              color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 20px" }}
+            <MenuItem
+              title="Reviews"
+              routerLink={<Link to="/testimonials"></Link>}
+              icon={<RateReviewOutlinedIcon style={{ color: colors.grey[100] }}/>}
+              selected={selected}
+              setSelected={setSelected}
+
             >
-              Charts
+            <Typography
+              color={colors.grey[100]}
+            >
+              Reviews
             </Typography>
-            <Item
-              title="Bar Chart"
-              to="/bar"
-              icon={<BarChartOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Pie Chart"
-              to="/pie"
-              icon={<PieChartOutlineOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Line Chart"
-              to="/line"
-              icon={<TimelineOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Geography Chart"
-              to="/geography"
-              icon={<MapOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
+            </MenuItem>  
+
+            
+            
           </Box>
         </Menu>
+        </Box>
       </Sidebar>
     </Box>
   );

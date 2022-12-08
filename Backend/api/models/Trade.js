@@ -10,6 +10,10 @@ const Schema = new mongoose.Schema({
         type: String,
         required: 'symbol is required.'
     },
+    name: {
+        type: String,
+        required: 'name is required.'
+    },
     price: {
         type: Number,
         required: 'price is required.'

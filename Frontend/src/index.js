@@ -5,18 +5,23 @@ import App from './App';
 import { BrowserRouter } from "react-router-dom";
 import { ProSidebarProvider } from 'react-pro-sidebar';
 import { AuthContextProvider } from './contexts/AuthContext.jsx'
+// import { BalContextProvider } from './contexts/BalContext';
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
       <AuthContextProvider>
-        <ProSidebarProvider>
-          <App />
-        </ProSidebarProvider>
-      </AuthContextProvider>
-    </BrowserRouter>
-  </React.StrictMode>
+          {/* <BalContextProvider> */}
+            <ProSidebarProvider>
+              <App />
+            </ProSidebarProvider>
+          {/* </BalContextProvider> */}
+        </AuthContextProvider>
+      </BrowserRouter>
+    </React.StrictMode>
+        
+        
 );
 
 

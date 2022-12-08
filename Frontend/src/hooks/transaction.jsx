@@ -19,7 +19,7 @@ export const useTransaction = () =>{
 
         if(!response.ok){
             setIsLoading(false)
-            setError(json.error)
+            setError(json.Error)
             return false;
         }
         if(response.ok){

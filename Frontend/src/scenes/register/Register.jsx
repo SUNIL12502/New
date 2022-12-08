@@ -97,6 +97,11 @@ const Register = () => {
     const {signup, error, isLoading} = useSignup();
     let navigate = useNavigate();
 
+    
+    const redirectHandler = async(e) =>{
+      // setRedirect(true)
+      navigate('../login')
+    }
     const handleSubmit = async (e) =>{
         e.preventDefault()
 
@@ -133,7 +138,7 @@ const Register = () => {
             position="absolute"
             p="2rem"
             ml="55rem"
-            mt="8rem"
+            mt="4rem"
             pb="10rem"
             borderRadius="1.5rem"
             // backgroundColor={theme.palette.background.alt}
@@ -173,7 +178,6 @@ const Register = () => {
                     value = {email}
                     onChange={(e) =>{setEmail(e.target.value)}}
                     autoComplete="email"
-                    // ref={emailRef}
                     autoFocus
                 />
                 <TextField
@@ -204,6 +208,9 @@ const Register = () => {
                 {error && <><Alert severity="error">{error}</Alert><Navigate to="/register" replace={true} /></>}
                 {/* {!error && <Navigate to="/home" replace={true}/>} */}
                 {/* {login && (<Navigate to="/login" replace={true} />)} */}
+                <a href="/login" onClick={redirectHandler} variant="body2">
+                  {"Already have an account? Log In"}
+                </a>
             </Box>
 
       </Box>
