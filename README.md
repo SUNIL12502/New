@@ -63,7 +63,7 @@ Contains realtime stock chart and technical analysis of that stock. Used Trading
 
 ## Folder Structure
 
- # Backend Directory
+ 	# Backend Directory
     .
     ├── app.js                  #  all modules imported in this file and mongoDB connection          
     ├── server.js               #  Start point of the code
