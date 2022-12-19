@@ -100,3 +100,6 @@ Contains realtime stock chart and technical analysis of that stock. Used Trading
 # Domain Model
 ![alt text](https://github.com/neu-mis-info6150-fall-2022/final-project-jams/blob/main/images/domainDesign.png)
 
+
+
+
