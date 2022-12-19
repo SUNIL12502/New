@@ -97,14 +97,19 @@ Contains realtime stock chart and technical analysis of that stock. Used Trading
 * Run "npm start" in the frontend folder.
 * You will be redirected to landing page of the project.
 
-# Domain Model
+## Domain Model
 ![alt text](https://github.com/neu-mis-info6150-fall-2022/final-project-jams/blob/main/images/domainDesign.png)
 
-# Result Screenshots
+## Result Screenshots
+
+#### Landing Page
 ![Landing Page](https://raw.githubusercontent.com/Anay-Pampatwar/Stocks-Portfolio-Manager-React-App/main/screenshots/landing%20page.png)
 
+#### Dashboard
 ![Dashboard](https://raw.githubusercontent.com/Anay-Pampatwar/Stocks-Portfolio-Manager-React-App/main/screenshots/details.png)
 
+
+#### User Holdings
 ![User Holdings](https://raw.githubusercontent.com/Anay-Pampatwar/Stocks-Portfolio-Manager-React-App/main/screenshots/portfolio.png)
 
 
