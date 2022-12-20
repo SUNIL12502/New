@@ -1,21 +1,12 @@
 # final-project-jams
 
-final-project-jams created by GitHub Classroom
-
-
-
-## Team members:    
-
-1. Moinuddin Raziuddin Khaja (NUID - 0027620250, Email - khaja.m@northeastern.edu)          
-2. Anay Rajesh Pampatwar (NUID - 002766273, Email - pampatwar.a@northeastern.edu)
-3. Jay Milan Doshi (NUID - 002762973, Email - doshi.jaym@northeastern.edu)
-4. Swapnil Shankarrao Biradar (NUID - 002775707, Email - biradar.sw@northeastern.edu)
-
+Web app Link - https://stocktradeportfolio.netlify.app/
 
 ## Overview:
 
-A Stocks Portfolio management web application which enables the user to view stock listings, IPO listings, add stocks to watchlist, buy/sell stocks, display the portfolio, stock transaction history and showcase the stock news.
+- A Stocks Portfolio management web application which enables the user to view stock listings, IPO listings, add stocks to watchlist, buy/sell stocks, display the portfolio, stock transaction history and showcase the stock news.
 
+- Server Deployed on Heroku and Client deployed on Netlify
 
 ## Architecture & Technologies
 
@@ -29,7 +20,6 @@ A Stocks Portfolio management web application which enables the user to view sto
 * <b>Sass, CSS3 and HTML5</b>, used to manage the presentation and styling of the project.
 * <b>finnhub.io</b>, a third party finance API that provides real time stock market price, stock news and IPO listings.
 * <b>TradingView</b>, a REST API that provides real time stock market charts.
-
 
 
 ## Functionality:
