@@ -1,4 +1,4 @@
-# final-project-jams
+## Stocks Portfolio Manager React App
 
 Web app Link - https://stocktradeportfolio.netlify.app/
 
