@@ -100,14 +100,14 @@ const Register = () => {
     
     const redirectHandler = async(e) =>{
       // setRedirect(true)
-      navigate('../login')
+      navigate('/login')
     }
     const handleSubmit = async (e) =>{
         e.preventDefault()
 
         const isLoggedIn = await signup(firstName, lastName, email, password);
        
-        isLoggedIn?navigate('../home'):navigate("../register");
+        isLoggedIn?navigate('/home'):navigate("/register");
     }
   return (
     <Box sx={{display:flexbox, backgroundColor:colors.blueAccent[400]}}>

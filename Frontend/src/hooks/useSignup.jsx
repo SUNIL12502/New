@@ -11,7 +11,7 @@ export const useSignup = () =>{
         setError(null)
         
 
-        const url = "http://localhost:8080/user/signup/";
+        const url = "http://localhost:8080/user/signup";
         const response = await fetch (url, {
             method: 'POST',
             headers:{'Content-Type':'application/json'},

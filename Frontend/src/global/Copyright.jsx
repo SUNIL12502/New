@@ -8,8 +8,8 @@ export default function Copyright(props) {
 
     return (
       <Typography variant="body2" color="text.primary" align="center" {...props}>
-        <Link color="inherit" sx={{textDecoration:"none"}} href="https://github.com/neu-mis-info6150-fall-2022/final-project-jams/tree/main">
-          Made with Love by Jay, Anay, Moinuddin & Swapnil
+        <Link color="inherit" sx={{textDecoration:"none"}} href="https://github.com/SUNIL12502/Team-Eagles">
+          Made with Lot of Love by Sunil, Nitin, Prarnav & Prabhas
         </Link>{' '}
         {new Date().getFullYear()}
         {'.'}

@@ -4,7 +4,11 @@
   "description": "final-project-jams created by GitHub Classroom",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "concurrently \"npm run start:backend\" \"npm run start:frontend\"",
+    "start:backend": "cd Backend && npm start",
+    "start:frontend": "cd Frontend && npm start",
+    "install:all": "npm install && cd Backend && npm install && cd ../Frontend && npm install"
   },
   "repository": {
     "type": "git",
@@ -15,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/neu-mis-info6150-fall-2022/final-project-jams/issues"
   },
-  "homepage": "https://github.com/neu-mis-info6150-fall-2022/final-project-jams#readme"
+  "homepage": "https://github.com/neu-mis-info6150-fall-2022/final-project-jams#readme",
+  "devDependencies": {
+    "concurrently": "^7.6.0"
+  }
 }

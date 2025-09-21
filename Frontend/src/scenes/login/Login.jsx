@@ -142,7 +142,7 @@ const Login = () => {
 
     const redirectHandler = async(e) =>{
       // setRedirect(true)
-      navigate('../login')
+      navigate('/login')
     }
 
     const handleSubmit = async (e) =>{
@@ -151,7 +151,7 @@ const Login = () => {
 
         const isLoggedIn= await login(email,password)
        
-    isLoggedIn ?navigate('../home'):navigate('../login')
+    isLoggedIn ?navigate('/home'):navigate('/login')
     }
   return (
     <Box sx={{display:flexbox, backgroundColor:colors.blueAccent[400]}}>

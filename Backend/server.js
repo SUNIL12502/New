@@ -1,10 +1,13 @@
 import app from './api/app.js';
-import * as dotenv from 'dotenv' 
-dotenv.config()
+import dotenv from 'dotenv';
+
+// Load environment variables
+dotenv.config();
+
 // Initialise the port
-const port = 8080;
+const port = process.env.PORT || 8080;
 
 // Listen to the port
-app.listen(process.env.PORT, () =>{
+app.listen(port, () => {
     console.log(`Server running on port ${port}`);
 });

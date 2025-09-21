@@ -60,7 +60,7 @@ const Portfolio = () => {
       let newData = [];
       const url = "https://finnhub.io/api/v1/quote?symbol=".concat(
         abc[key].symbol,
-        "&token=c94i99aad3if4j50rvn0"
+        "&token=demo"
       );
       await axios
         .get(url)
