@@ -9,7 +9,7 @@
 
 **A comprehensive stock portfolio management application with real-time trading capabilities**
 
-[![Live Demo](https://img.shields.io/badge/Live_Demo-Netlify-00C7B7?style=for-the-badge&logo=netlify)](https://stocktradeportfolio.netlify.app/)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Netlify-00C7B7?style=for-the-badge&logo=netlify)](https://lively-dodol-cc397c.netlify.app)
 [![Backend](https://img.shields.io/badge/Backend-Heroku-430098?style=for-the-badge&logo=heroku)](https://your-backend-url.herokuapp.com)
 
 </div>
@@ -79,9 +79,10 @@
 - 🗄️ MongoDB Atlas account
 - 🌐 Git
 
-### **1. Clone the Repository**
+### **1. Download the Project**
 ```bash
-git clone https://github.com/sunbyte16/Stocks-Portfolio-Manager-React-App.git
+# Download and extract the project files
+# Navigate to the project directory
 cd Stocks-Portfolio-Manager-React-App
 ```
 
@@ -208,11 +209,11 @@ Stocks-Portfolio-Manager-React-App/
 
 We welcome contributions! Please follow these steps:
 
-1. 🍴 **Fork** the repository
+1. 📥 **Download** the project files
 2. 🌿 **Create** a feature branch (`git checkout -b feature/AmazingFeature`)
 3. 💾 **Commit** your changes (`git commit -m 'Add some AmazingFeature'`)
-4. 📤 **Push** to the branch (`git push origin feature/AmazingFeature`)
-5. 🔄 **Open** a Pull Request
+4. 📧 **Contact** the author for collaboration
+5. 🔄 **Share** your improvements
 
 ---
 
@@ -226,7 +227,7 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 
 <div align="center">
 
-### **Created By Sunil Sharma❤️**
+### **Created By Sunil Sharma ❤️**
 
 *Full-Stack Developer & Stock Market Enthusiast*
 
@@ -262,16 +263,16 @@ If you have any questions or need help, feel free to reach out:
 <div align="center">
 
 [![Email](https://img.shields.io/badge/Email-sunilsharma.dev@gmail.com-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:sunilsharma.dev@gmail.com)
-[![GitHub Issues](https://img.shields.io/badge/GitHub-Issues-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/sunbyte16/Stocks-Portfolio-Manager-React-App/issues)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect_With_Me-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/sunil-kumar-bb88bb31a/)
+[![Portfolio](https://img.shields.io/badge/Portfolio-Visit_Site-00C7B7?style=for-the-badge&logo=netlify&logoColor=white)](https://lively-dodol-cc397c.netlify.app)
 
 </div>
 
 ### 🆘 **Quick Help**
-- 🐛 **Bug Reports**: [Create an Issue](https://github.com/sunbyte16/Stocks-Portfolio-Manager-React-App/issues/new?template=bug_report.md)
-- 💡 **Feature Requests**: [Suggest a Feature](https://github.com/sunbyte16/Stocks-Portfolio-Manager-React-App/issues/new?template=feature_request.md)
-- ❓ **Questions**: [Ask a Question](https://github.com/sunbyte16/Stocks-Portfolio-Manager-React-App/discussions)
-- 📖 **Documentation**: [View Docs](https://github.com/sunbyte16/Stocks-Portfolio-Manager-React-App/wiki)
+- 🐛 **Bug Reports**: Contact via email for bug reports
+- 💡 **Feature Requests**: Share your ideas via email or LinkedIn
+- ❓ **Questions**: Reach out for any questions or clarifications
+- 📖 **Documentation**: Check the README for detailed information
 
 ---
 
@@ -281,6 +282,5 @@ If you have any questions or need help, feel free to reach out:
 
 Made with ❤️ and lots of ☕
 
-</div>
-#   P r o j e c t w i t h S u n i l  
+</div>#   N e w  
  
