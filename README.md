@@ -283,3 +283,5 @@ If you have any questions or need help, feel free to reach out:
 Made with ❤️ and lots of ☕
 
 </div>#
+#   F i n T e c h - P e r s o n a l  
+ 
